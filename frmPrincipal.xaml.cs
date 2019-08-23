@@ -120,7 +120,7 @@ namespace abcCompleto
                 }
                 else
                 {
-                    Limpiar(false);
+                    txtNoEmpleado.Focus();
                 }
             }
         }
@@ -172,9 +172,7 @@ namespace abcCompleto
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            objControlador.ValidarControlesVacios(GridControles2.Children);
-            //VentanaDePrueba x = new VentanaDePrueba();
-            //x.ShowDialog();
+           
         }
 
         private void txtNoEmpleado_KeyDown(object sender, KeyEventArgs e)

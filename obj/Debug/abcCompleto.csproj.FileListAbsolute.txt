@@ -7,6 +7,7 @@ C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\bin
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmCam.baml
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmMovimientos.baml
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusqueda.g.cs
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmCam.g.cs
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmMovimientos.g.cs
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmPrincipal.g.cs
@@ -14,12 +15,10 @@ C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto_Content.g.cs
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto_MarkupCompile.cache
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto_MarkupCompile.lref
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusqueda.baml
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmPrincipal.baml
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.g.resources
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.Properties.Resources.resources
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.csproj.GenerateResource.Cache
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.exe
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.pdb
-C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.csprojResolveAssemblyReference.cache
-C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusqueda.baml
-C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusqueda.g.cs

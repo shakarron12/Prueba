@@ -105,6 +105,8 @@ namespace abcCompleto
                     DependencyObject child = VisualTreeHelper.GetChild(Control, 0);
                     var Grid = child as Grid;
                     bRegresa = ValidarControlesVacios(Grid.Children);
+                    if (bRegresa == false)
+                        break;
                 }
 
             }

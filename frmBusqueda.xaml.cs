@@ -31,16 +31,16 @@ namespace abcCompleto
         clsRN objCale = new clsRN();
         private void txtBusquedaEmp_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //DataContext = objCale.BuscarEmpleadoLike(txtBusquedaEmp.Text);
-            dtgEmpleados.ItemsSource = objCale.BuscarEmpleadoLike(txtBusquedaEmp.Text);
+            if (txtBusquedaEmp.Text != string.Empty)
+                dtgEmpleados.ItemsSource = objCale.BuscarEmpleadoLike(txtBusquedaEmp.Text);
+            else
+                dtgEmpleados.ItemsSource = null;
         }
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-            {
                 this.Close();
-            }
         }
 
         private void dtgEmpleados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
