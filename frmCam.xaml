@@ -1,0 +1,15 @@
+﻿<Window x:Name="frmCamara" x:Class="abcCompleto.frmCam"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="frmCam" Height="300" Width="300" KeyDown="frmCamara_KeyDown" WindowStartupLocation="CenterScreen" Closing="frmCamara_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgFoto" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="171" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Source="imagenes/user.ico" Stretch="Fill"/>
+        <Button x:Name="btnCapturar" Content="Capturar" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="126" Height="20" Click="btnCapturar_Click"/>
+        <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="126" Grid.Column="1" Height="20" Click="btnBuscar_Click"/>
+
+    </Grid>
+</Window>

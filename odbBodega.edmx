@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RopaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmpleadoABC">
+          <Key>
+            <PropertyRef Name="idNumEmpleado" />
+          </Key>
+          <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" />
+          <Property Name="primerap" Type="varchar" MaxLength="20" />
+          <Property Name="segundoap" Type="varchar" MaxLength="20" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="curp" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="fechanac" Type="datetime" />
+          <Property Name="idrol" Type="int" Nullable="false" />
+          <Property Name="idtipo" Type="int" Nullable="false" />
+          <Property Name="img_usuario" Type="image" />
+        </EntityType>
+        <EntityType Name="MovimientosABC">
+          <Key>
+            <PropertyRef Name="idmovimiento" />
+          </Key>
+          <Property Name="idmovimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idnumempleado" Type="int" Nullable="false" />
+          <Property Name="cant_entregas" Type="int" />
+          <Property Name="idrol" Type="int" Nullable="false" />
+          <Property Name="idtipo" Type="int" Nullable="false" />
+          <Property Name="fecha_movimiento" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RolABC">
+          <Key>
+            <PropertyRef Name="idrol" />
+          </Key>
+          <Property Name="idrol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_rol" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Ropa.dbo.SalarioABC' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="SalarioABC">
+          <Key>
+            <PropertyRef Name="idNumEmpleado" />
+          </Key>
+          <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+          <Property Name="salario_mensual" Type="float" />
+        </EntityType>
+        <EntityType Name="TipoABC">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_tipo" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_EmpleadosABC_RolABC">
+          <End Role="RolABC" Type="Self.RolABC" Multiplicity="1" />
+          <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolABC">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="EmpleadoABC">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosABC_TipoABC">
+          <End Role="TipoABC" Type="Self.TipoABC" Multiplicity="1" />
+          <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoABC">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="EmpleadoABC">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientosABC_EmpleadoABC">
+          <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
+          <End Role="MovimientosABC" Type="Self.MovimientosABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpleadoABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Principal>
+            <Dependent Role="MovimientosABC">
+              <PropertyRef Name="idnumempleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalarioABC_EmpleadoABC">
+          <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
+          <End Role="SalarioABC" Type="Self.SalarioABC" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpleadoABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Principal>
+            <Dependent Role="SalarioABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RopaModelStoreContainer">
+          <EntitySet Name="EmpleadoABC" EntityType="Self.EmpleadoABC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovimientosABC" EntityType="Self.MovimientosABC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolABC" EntityType="Self.RolABC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoABC" EntityType="Self.TipoABC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalarioABC" EntityType="Self.SalarioABC" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SalarioABC].[idNumEmpleado] AS [idNumEmpleado], 
+    [SalarioABC].[salario_mensual] AS [salario_mensual]
+    FROM [dbo].[SalarioABC] AS [SalarioABC]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="Self.FK_EmpleadosABC_RolABC">
+            <End Role="RolABC" EntitySet="RolABC" />
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="Self.FK_EmpleadosABC_TipoABC">
+            <End Role="TipoABC" EntitySet="TipoABC" />
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientosABC_EmpleadoABC" Association="Self.FK_MovimientosABC_EmpleadoABC">
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+            <End Role="MovimientosABC" EntitySet="MovimientosABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalarioABC_EmpleadoABC" Association="Self.FK_SalarioABC_EmpleadoABC">
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+            <End Role="SalarioABC" EntitySet="SalarioABC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RopaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RolABC">
+          <Key>
+            <PropertyRef Name="idrol" />
+          </Key>
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <Property Name="desc_rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC1" FromRole="RolABC" ToRole="EmpleadoABC" />
+        </EntityType>
+        <EntityType Name="TipoABC">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="Int32" Nullable="false" />
+          <Property Name="desc_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC1" FromRole="TipoABC" ToRole="EmpleadoABC" />
+        </EntityType>
+        <EntityContainer Name="odbBodegaPrueba" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RolABC" EntityType="Self.RolABC" />
+          <EntitySet Name="TipoABC" EntityType="Self.TipoABC" />
+          <EntitySet Name="MovimientosABC" EntityType="RopaModel.MovimientosABC" />
+          <EntitySet Name="SalarioABC" EntityType="RopaModel.SalarioABC" />
+          <EntitySet Name="EmpleadoABC" EntityType="RopaModel.EmpleadoABC" />
+          <AssociationSet Name="FK_EmpleadosABC_RolABC1" Association="RopaModel.FK_EmpleadosABC_RolABC1">
+            <End Role="RolABC" EntitySet="RolABC" />
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosABC_TipoABC1" Association="RopaModel.FK_EmpleadosABC_TipoABC1">
+            <End Role="TipoABC" EntitySet="TipoABC" />
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientosABC_EmpleadoABC" Association="RopaModel.FK_MovimientosABC_EmpleadoABC">
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+            <End Role="MovimientosABC" EntitySet="MovimientosABC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalarioABC_EmpleadoABC" Association="RopaModel.FK_SalarioABC_EmpleadoABC">
+            <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+            <End Role="SalarioABC" EntitySet="SalarioABC" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MovimientosABC">
+          <Key>
+            <PropertyRef Name="idmovimiento" />
+          </Key>
+          <Property Name="idmovimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idnumempleado" Type="Int32" Nullable="false" />
+          <Property Name="cant_entregas" Type="Int32" />
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <Property Name="idtipo" Type="Int32" Nullable="false" />
+          <Property Name="fecha_movimiento" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_MovimientosABC_EmpleadoABC" FromRole="MovimientosABC" ToRole="EmpleadoABC" />
+        </EntityType>
+        <EntityType Name="SalarioABC">
+          <Key>
+            <PropertyRef Name="idNumEmpleado" />
+          </Key>
+          <Property Name="idNumEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="salario_mensual" Type="Double" />
+          <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="SalarioABC" ToRole="EmpleadoABC" />
+        </EntityType>
+        <EntityType Name="EmpleadoABC">
+          <Key>
+            <PropertyRef Name="idNumEmpleado" />
+          </Key>
+          <Property Name="idNumEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="primerap" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="segundoap" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="curp" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="fechanac" Type="DateTime" Precision="3" />
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <Property Name="idtipo" Type="Int32" Nullable="false" />
+          <Property Name="img_usuario" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="RolABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC1" FromRole="EmpleadoABC" ToRole="RolABC" />
+          <NavigationProperty Name="TipoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC1" FromRole="EmpleadoABC" ToRole="TipoABC" />
+          <NavigationProperty Name="MovimientosABC" Relationship="RopaModel.FK_MovimientosABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="MovimientosABC" />
+          <NavigationProperty Name="SalarioABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="SalarioABC" />
+        </EntityType>
+        <Association Name="FK_EmpleadosABC_RolABC1">
+          <End Type="RopaModel.RolABC" Role="RolABC" Multiplicity="1" />
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolABC">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="EmpleadoABC">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosABC_TipoABC1">
+          <End Type="RopaModel.TipoABC" Role="TipoABC" Multiplicity="1" />
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoABC">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="EmpleadoABC">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientosABC_EmpleadoABC">
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
+          <End Type="RopaModel.MovimientosABC" Role="MovimientosABC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpleadoABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Principal>
+            <Dependent Role="MovimientosABC">
+              <PropertyRef Name="idnumempleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalarioABC_EmpleadoABC">
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
+          <End Type="RopaModel.SalarioABC" Role="SalarioABC" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpleadoABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Principal>
+            <Dependent Role="SalarioABC">
+              <PropertyRef Name="idNumEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RopaModelStoreContainer" CdmEntityContainer="odbBodegaPrueba">
+          <EntitySetMapping Name="RolABC">
+            <EntityTypeMapping TypeName="RopaModel.RolABC">
+              <MappingFragment StoreEntitySet="RolABC">
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+                <ScalarProperty Name="desc_rol" ColumnName="desc_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoABC">
+            <EntityTypeMapping TypeName="RopaModel.TipoABC">
+              <MappingFragment StoreEntitySet="TipoABC">
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="desc_tipo" ColumnName="desc_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovimientosABC">
+            <EntityTypeMapping TypeName="RopaModel.MovimientosABC">
+              <MappingFragment StoreEntitySet="MovimientosABC">
+                <ScalarProperty Name="fecha_movimiento" ColumnName="fecha_movimiento" />
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+                <ScalarProperty Name="cant_entregas" ColumnName="cant_entregas" />
+                <ScalarProperty Name="idnumempleado" ColumnName="idnumempleado" />
+                <ScalarProperty Name="idmovimiento" ColumnName="idmovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalarioABC">
+            <EntityTypeMapping TypeName="RopaModel.SalarioABC">
+              <MappingFragment StoreEntitySet="SalarioABC">
+                <ScalarProperty Name="salario_mensual" ColumnName="salario_mensual" />
+                <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadoABC">
+            <EntityTypeMapping TypeName="RopaModel.EmpleadoABC">
+              <MappingFragment StoreEntitySet="EmpleadoABC">
+                <ScalarProperty Name="img_usuario" ColumnName="img_usuario" />
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+                <ScalarProperty Name="fechanac" ColumnName="fechanac" />
+                <ScalarProperty Name="curp" ColumnName="curp" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="segundoap" ColumnName="segundoap" />
+                <ScalarProperty Name="primerap" ColumnName="primerap" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

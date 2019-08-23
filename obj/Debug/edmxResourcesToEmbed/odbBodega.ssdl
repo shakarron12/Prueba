@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RopaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EmpleadoABC">
+    <Key>
+      <PropertyRef Name="idNumEmpleado" />
+    </Key>
+    <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" />
+    <Property Name="primerap" Type="varchar" MaxLength="20" />
+    <Property Name="segundoap" Type="varchar" MaxLength="20" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="curp" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="fechanac" Type="datetime" />
+    <Property Name="idrol" Type="int" Nullable="false" />
+    <Property Name="idtipo" Type="int" Nullable="false" />
+    <Property Name="img_usuario" Type="image" />
+  </EntityType>
+  <EntityType Name="MovimientosABC">
+    <Key>
+      <PropertyRef Name="idmovimiento" />
+    </Key>
+    <Property Name="idmovimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnumempleado" Type="int" Nullable="false" />
+    <Property Name="cant_entregas" Type="int" />
+    <Property Name="idrol" Type="int" Nullable="false" />
+    <Property Name="idtipo" Type="int" Nullable="false" />
+    <Property Name="fecha_movimiento" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RolABC">
+    <Key>
+      <PropertyRef Name="idrol" />
+    </Key>
+    <Property Name="idrol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_rol" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Ropa.dbo.SalarioABC' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="SalarioABC">
+    <Key>
+      <PropertyRef Name="idNumEmpleado" />
+    </Key>
+    <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+    <Property Name="salario_mensual" Type="float" />
+  </EntityType>
+  <EntityType Name="TipoABC">
+    <Key>
+      <PropertyRef Name="idtipo" />
+    </Key>
+    <Property Name="idtipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_tipo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_EmpleadosABC_RolABC">
+    <End Role="RolABC" Type="Self.RolABC" Multiplicity="1" />
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolABC">
+        <PropertyRef Name="idrol" />
+      </Principal>
+      <Dependent Role="EmpleadoABC">
+        <PropertyRef Name="idrol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpleadosABC_TipoABC">
+    <End Role="TipoABC" Type="Self.TipoABC" Multiplicity="1" />
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoABC">
+        <PropertyRef Name="idtipo" />
+      </Principal>
+      <Dependent Role="EmpleadoABC">
+        <PropertyRef Name="idtipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovimientosABC_EmpleadoABC">
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
+    <End Role="MovimientosABC" Type="Self.MovimientosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoABC">
+        <PropertyRef Name="idNumEmpleado" />
+      </Principal>
+      <Dependent Role="MovimientosABC">
+        <PropertyRef Name="idnumempleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalarioABC_EmpleadoABC">
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
+    <End Role="SalarioABC" Type="Self.SalarioABC" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoABC">
+        <PropertyRef Name="idNumEmpleado" />
+      </Principal>
+      <Dependent Role="SalarioABC">
+        <PropertyRef Name="idNumEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RopaModelStoreContainer">
+    <EntitySet Name="EmpleadoABC" EntityType="Self.EmpleadoABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MovimientosABC" EntityType="Self.MovimientosABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolABC" EntityType="Self.RolABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoABC" EntityType="Self.TipoABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalarioABC" EntityType="Self.SalarioABC" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SalarioABC].[idNumEmpleado] AS [idNumEmpleado], 
+    [SalarioABC].[salario_mensual] AS [salario_mensual]
+    FROM [dbo].[SalarioABC] AS [SalarioABC]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="Self.FK_EmpleadosABC_RolABC">
+      <End Role="RolABC" EntitySet="RolABC" />
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="Self.FK_EmpleadosABC_TipoABC">
+      <End Role="TipoABC" EntitySet="TipoABC" />
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovimientosABC_EmpleadoABC" Association="Self.FK_MovimientosABC_EmpleadoABC">
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+      <End Role="MovimientosABC" EntitySet="MovimientosABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalarioABC_EmpleadoABC" Association="Self.FK_SalarioABC_EmpleadoABC">
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+      <End Role="SalarioABC" EntitySet="SalarioABC" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

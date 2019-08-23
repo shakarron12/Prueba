@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RopaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EmpleadosABC">
+    <Key>
+      <PropertyRef Name="idNumEmpleado" />
+    </Key>
+    <Property Name="idNumEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primerap" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundoap" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="curp" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fechanac" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="idrol" Type="Int32" Nullable="false" />
+    <Property Name="idtipo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RolABC" Relationship="Self.FK_EmpleadosABC_RolABC" FromRole="EmpleadosABC" ToRole="RolABC" />
+    <NavigationProperty Name="TipoABC" Relationship="Self.FK_EmpleadosABC_TipoABC" FromRole="EmpleadosABC" ToRole="TipoABC" />
+  </EntityType>
+  <EntityType Name="RolABC">
+    <Key>
+      <PropertyRef Name="idrol" />
+    </Key>
+    <Property Name="idrol" Type="Int32" Nullable="false" />
+    <Property Name="desc_rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmpleadosABC" Relationship="Self.FK_EmpleadosABC_RolABC" FromRole="RolABC" ToRole="EmpleadosABC" />
+  </EntityType>
+  <EntityType Name="TipoABC">
+    <Key>
+      <PropertyRef Name="idtipo" />
+    </Key>
+    <Property Name="idtipo" Type="Int32" Nullable="false" />
+    <Property Name="desc_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmpleadosABC" Relationship="Self.FK_EmpleadosABC_TipoABC" FromRole="TipoABC" ToRole="EmpleadosABC" />
+  </EntityType>
+  <Association Name="FK_EmpleadosABC_RolABC">
+    <End Role="RolABC" Type="Self.RolABC" Multiplicity="1" />
+    <End Role="EmpleadosABC" Type="Self.EmpleadosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolABC">
+        <PropertyRef Name="idrol" />
+      </Principal>
+      <Dependent Role="EmpleadosABC">
+        <PropertyRef Name="idrol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpleadosABC_TipoABC">
+    <End Role="TipoABC" Type="Self.TipoABC" Multiplicity="1" />
+    <End Role="EmpleadosABC" Type="Self.EmpleadosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoABC">
+        <PropertyRef Name="idtipo" />
+      </Principal>
+      <Dependent Role="EmpleadosABC">
+        <PropertyRef Name="idtipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="odbBodega" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EmpleadosABC" EntityType="Self.EmpleadosABC" />
+    <EntitySet Name="RolABC" EntityType="Self.RolABC" />
+    <EntitySet Name="TipoABC" EntityType="Self.TipoABC" />
+    <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="Self.FK_EmpleadosABC_RolABC">
+      <End Role="RolABC" EntitySet="RolABC" />
+      <End Role="EmpleadosABC" EntitySet="EmpleadosABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="Self.FK_EmpleadosABC_TipoABC">
+      <End Role="TipoABC" EntitySet="TipoABC" />
+      <End Role="EmpleadosABC" EntitySet="EmpleadosABC" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

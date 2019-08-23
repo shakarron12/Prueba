@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RopaModelStoreContainer" CdmEntityContainer="odbBodegaPrueba">
+    <EntitySetMapping Name="RolABC">
+      <EntityTypeMapping TypeName="RopaModel.RolABC">
+        <MappingFragment StoreEntitySet="RolABC">
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="desc_rol" ColumnName="desc_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoABC">
+      <EntityTypeMapping TypeName="RopaModel.TipoABC">
+        <MappingFragment StoreEntitySet="TipoABC">
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="desc_tipo" ColumnName="desc_tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MovimientosABC">
+      <EntityTypeMapping TypeName="RopaModel.MovimientosABC">
+        <MappingFragment StoreEntitySet="MovimientosABC">
+          <ScalarProperty Name="fecha_movimiento" ColumnName="fecha_movimiento" />
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="cant_entregas" ColumnName="cant_entregas" />
+          <ScalarProperty Name="idnumempleado" ColumnName="idnumempleado" />
+          <ScalarProperty Name="idmovimiento" ColumnName="idmovimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalarioABC">
+      <EntityTypeMapping TypeName="RopaModel.SalarioABC">
+        <MappingFragment StoreEntitySet="SalarioABC">
+          <ScalarProperty Name="salario_mensual" ColumnName="salario_mensual" />
+          <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpleadoABC">
+      <EntityTypeMapping TypeName="RopaModel.EmpleadoABC">
+        <MappingFragment StoreEntitySet="EmpleadoABC">
+          <ScalarProperty Name="img_usuario" ColumnName="img_usuario" />
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="fechanac" ColumnName="fechanac" />
+          <ScalarProperty Name="curp" ColumnName="curp" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="segundoap" ColumnName="segundoap" />
+          <ScalarProperty Name="primerap" ColumnName="primerap" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

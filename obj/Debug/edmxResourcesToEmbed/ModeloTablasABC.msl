@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RopaModelStoreContainer" CdmEntityContainer="odbBodega">
+    <EntitySetMapping Name="EmpleadosABC">
+      <EntityTypeMapping TypeName="RopaModel.EmpleadosABC">
+        <MappingFragment StoreEntitySet="EmpleadosABC">
+          <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="primerap" ColumnName="primerap" />
+          <ScalarProperty Name="segundoap" ColumnName="segundoap" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="curp" ColumnName="curp" />
+          <ScalarProperty Name="fechanac" ColumnName="fechanac" />
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolABC">
+      <EntityTypeMapping TypeName="RopaModel.RolABC">
+        <MappingFragment StoreEntitySet="RolABC">
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="desc_rol" ColumnName="desc_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoABC">
+      <EntityTypeMapping TypeName="RopaModel.TipoABC">
+        <MappingFragment StoreEntitySet="TipoABC">
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="desc_tipo" ColumnName="desc_tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

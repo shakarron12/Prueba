@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RopaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EmpleadosABC">
+    <Key>
+      <PropertyRef Name="idNumEmpleado" />
+    </Key>
+    <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="primerap" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="segundoap" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="60" />
+    <Property Name="curp" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="fechanac" Type="datetime" Nullable="false" />
+    <Property Name="idrol" Type="int" Nullable="false" />
+    <Property Name="idtipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RolABC">
+    <Key>
+      <PropertyRef Name="idrol" />
+    </Key>
+    <Property Name="idrol" Type="int" Nullable="false" />
+    <Property Name="desc_rol" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TipoABC">
+    <Key>
+      <PropertyRef Name="idtipo" />
+    </Key>
+    <Property Name="idtipo" Type="int" Nullable="false" />
+    <Property Name="desc_tipo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_EmpleadosABC_RolABC">
+    <End Role="RolABC" Type="Self.RolABC" Multiplicity="1" />
+    <End Role="EmpleadosABC" Type="Self.EmpleadosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolABC">
+        <PropertyRef Name="idrol" />
+      </Principal>
+      <Dependent Role="EmpleadosABC">
+        <PropertyRef Name="idrol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpleadosABC_TipoABC">
+    <End Role="TipoABC" Type="Self.TipoABC" Multiplicity="1" />
+    <End Role="EmpleadosABC" Type="Self.EmpleadosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoABC">
+        <PropertyRef Name="idtipo" />
+      </Principal>
+      <Dependent Role="EmpleadosABC">
+        <PropertyRef Name="idtipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RopaModelStoreContainer">
+    <EntitySet Name="EmpleadosABC" EntityType="Self.EmpleadosABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolABC" EntityType="Self.RolABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoABC" EntityType="Self.TipoABC" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="Self.FK_EmpleadosABC_RolABC">
+      <End Role="RolABC" EntitySet="RolABC" />
+      <End Role="EmpleadosABC" EntitySet="EmpleadosABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="Self.FK_EmpleadosABC_TipoABC">
+      <End Role="TipoABC" EntitySet="TipoABC" />
+      <End Role="EmpleadosABC" EntitySet="EmpleadosABC" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
