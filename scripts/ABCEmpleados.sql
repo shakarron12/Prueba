@@ -1,3 +1,16 @@
+create table RolABC
+(
+	idrol integer IDENTITY(1,1) primary key,
+	bono float default 0.0,
+	desc_rol varchar(20)
+);
+
+create table TipoABC
+(
+	idtipo integer IDENTITY(1,1) primary key,
+	desc_tipo varchar(20)
+);
+
 create table EmpleadoABC
 (
 	idNumEmpleado integer primary key not null,
@@ -15,29 +28,19 @@ create table EmpleadoABC
     CONSTRAINT FK_EmpleadosABC_TipoABC FOREIGN KEY (idtipo)     
     REFERENCES TipoABC (idtipo),
    
-);
- CONSTRAINT FK_EmpleadosABC_SalarioABC FOREIGN KEY (idNumEmpleado)     
-    REFERENCES SalarioABC (idnumempleado)
-create table RolABC
-(
-	idrol integer IDENTITY(1,1) primary key,
-	desc_rol varchar(20)
-);
-
-create table TipoABC
-(
-	idtipo integer IDENTITY(1,1) primary key,
-	desc_tipo varchar(20)
+   
 );
 
 create table SalarioABC
-(
-	idNumEmpleado integer not null,
-	salario_mensual float default 0.0,
-	CONSTRAINT FK_SalarioABC_EmpleadoABC FOREIGN KEY (idnumempleado)     
-    REFERENCES EmpleadoABC (idnumempleado)  
+(	
+	idSalario int IDENTITY(1,1) primary key,
+	idNumEmpleado integer,
+	salario_mensual float default 0.00,
+	CONSTRAINT FK_SalarioABC_EmpleadoABC FOREIGN KEY (idNumEmpleado)     
+    REFERENCES EmpleadoABC (idNumEmpleado)
 );
 
+alter table SalarioABC ALTER COLUMN salario_mensual float ;
 create table MovimientosABC
 (
 	idmovimiento int IDENTITY(1,1) primary key,
@@ -50,26 +53,30 @@ create table MovimientosABC
     REFERENCES EmpleadoABC (idnumempleado)
 );
 
-
-insert into RolABC (desc_rol) values ('Chofer');
-insert into RolABC (desc_rol) values ('Cargador');
+insert into RolABC (desc_rol,bono) values ('Chofer', 10.00);
+insert into RolABC (desc_rol,bono) values ('Cargador',5.00);
 insert into RolABC (desc_rol) values ('Auxiliar');
 
 insert into TipoABC (desc_tipo) values ('Interno');
 insert into TipoABC (desc_tipo) values ('Externo');
 
+delete from SalarioABC where idmovimiento = 1
+
 select * from RolABC
 select * from TipoABC
 select * from EmpleadoABC
+select * from MovimientosABC
+select * from SalarioABC
 
-"Violation of PRIMARY KEY constraint 'PK__Empleado__1E8475F75717BEEC'. Cannot insert duplicate key in object 'dbo.EmpleadoABC'.\r\nThe statement has been terminated."
+insert into SalarioABC (idNumEmpleado) values (97848972);
 
-drop table TipoABC;
-drop table RolABC;
-drop table EmpleadosABC;
-drop table SalarioABC;
-drop table MovimientosABC;
+--drop table TipoABC;
+--drop table RolABC;
+--drop table EmpleadoABC;
+--drop table SalarioABC;
+--drop table MovimientosABC;
 
-select * from CatPeriodos
 
-select * from Cl
+select b.salario_mensual FROM EmpleadoABC a join SalarioABC b ON a.idNumEmpleado = b.idsalario
+
+{"Conflicting changes detected. This may happen when trying to insert multiple entities with the same key."}

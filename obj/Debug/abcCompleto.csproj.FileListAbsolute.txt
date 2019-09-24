@@ -22,3 +22,9 @@ C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.csproj.GenerateResource.Cache
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.exe
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.pdb
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\abcCompleto.csprojResolveAssemblyReference.cache
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmModificarMovimientos.baml
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmModificarMovimientos.g.cs
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusquedaMovimientos.baml
+C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\obj\Debug\frmBusquedaMovimientos.g.cs

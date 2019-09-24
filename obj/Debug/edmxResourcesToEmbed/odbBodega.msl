@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="RopaModelStoreContainer" CdmEntityContainer="odbBodegaPrueba">
-    <EntitySetMapping Name="RolABC">
-      <EntityTypeMapping TypeName="RopaModel.RolABC">
-        <MappingFragment StoreEntitySet="RolABC">
-          <ScalarProperty Name="idrol" ColumnName="idrol" />
-          <ScalarProperty Name="desc_rol" ColumnName="desc_rol" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TipoABC">
       <EntityTypeMapping TypeName="RopaModel.TipoABC">
         <MappingFragment StoreEntitySet="TipoABC">
@@ -29,11 +21,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SalarioABC">
-      <EntityTypeMapping TypeName="RopaModel.SalarioABC">
-        <MappingFragment StoreEntitySet="SalarioABC">
-          <ScalarProperty Name="salario_mensual" ColumnName="salario_mensual" />
-          <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+    <EntitySetMapping Name="RolABC">
+      <EntityTypeMapping TypeName="RopaModel.RolABC">
+        <MappingFragment StoreEntitySet="RolABC">
+          <ScalarProperty Name="desc_rol" ColumnName="desc_rol" />
+          <ScalarProperty Name="bono" ColumnName="bono" />
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -50,6 +43,15 @@
           <ScalarProperty Name="primerap" ColumnName="primerap" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalarioABC">
+      <EntityTypeMapping TypeName="RopaModel.SalarioABC">
+        <MappingFragment StoreEntitySet="SalarioABC">
+          <ScalarProperty Name="salario_mensual" ColumnName="salario_mensual" />
+          <ScalarProperty Name="idNumEmpleado" ColumnName="idNumEmpleado" />
+          <ScalarProperty Name="idSalario" ColumnName="idSalario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

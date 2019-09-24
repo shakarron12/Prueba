@@ -29,10 +29,13 @@ namespace abcCompleto
     {
 
         bool bExiste;
-        clsAbc objControlador = new clsAbc();
+        clsPrincipal objControlador;
+        clsCalculoMovimiento objControladorMovimientos;
         public MainWindow()
         {
             InitializeComponent();
+            objControlador = new clsPrincipal();
+            objControladorMovimientos = new clsCalculoMovimiento();
             bExiste = false;
             txtNoEmpleado.Focus();
             cbRol.ItemsSource = objControlador.RetornarRoles();
@@ -43,8 +46,12 @@ namespace abcCompleto
         {
             if (bExiste)
             {
-                if (objControlador.EliminarEmpleado(Convert.ToInt32(txtNoEmpleado.Text)))
-                    MessageBox.Show("Se elimino con exito!...");
+                if (MessageBox.Show("¿Seguro que quiere eliminar el Empleado?", "Eliminar Empleado", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    if (objControlador.EliminarEmpleado(Convert.ToInt32(txtNoEmpleado.Text)))
+                        if (objControlador.EliminarSalario(Convert.ToInt32(txtNoEmpleado.Text)))
+                            MessageBox.Show("Se elimino con exito!...");
+                }
             }
         }
 
@@ -68,21 +75,33 @@ namespace abcCompleto
                     idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString()),
                     img_usuario = image == null ? null : objControlador.BitMapImageToArray(image)
                 };
+               
+                SalarioABC salario = new SalarioABC()
+                {
+                    idNumEmpleado = Convert.ToInt32(txtNoEmpleado.Text),
+                    salario_mensual = chkSalario.IsChecked == true ? Convert.ToDouble(txtSalario.Text) : 7200.00
+                };
 
                 if (bExiste)
                 {
                     if (objControlador.ActualizarEmpleado(empleado))
                     {
-                        MessageBox.Show("Se guardo con exito!...");
-                        Limpiar(true);
+                        if (objControlador.ActualizarSalario(salario)) 
+                        {
+                            MessageBox.Show("Se guardo con exito!...");
+                            Limpiar(true);
+                        }
                     }
                 }
                 else
                 {
                     if (objControlador.GuardarEmpleado(empleado))
                     {
-                        MessageBox.Show("Se guardo con exito!...");
-                        Limpiar(true);
+                        if (objControlador.GuardarSalario(salario))
+                        {
+                            MessageBox.Show("Se guardo con exito!...");
+                            Limpiar(true);
+                        }
                     }
                 }
             }
@@ -115,13 +134,29 @@ namespace abcCompleto
                         cbTipo.SelectedIndex = datos.idtipo - 1;
                         imgUser.Source = datos.img_usuario != null ? objControlador.ArrayToBitMapImage(datos.img_usuario) : objControlador.CargarImagenDefalut();
                         bExiste = true;
+                        btnAgregarMov.IsEnabled = true;
                     }
-                    txtNombre.Focus();
+                    
+                    var salario = objControlador.BuscarSalario(Convert.ToInt32(txtNoEmpleado.Text));
+
+                    if (salario.Count > 0)
+                    {
+                        chkSalario.IsChecked = true;
+                        foreach (var datos in salario)
+                        {
+                            txtSalario.Text = datos.salario_mensual.ToString();
+                        }
+                        txtNombre.Focus();
+                    }
                 }
                 else
                 {
                     txtNoEmpleado.Focus();
                 }
+            }
+            else
+            {
+                txtNoEmpleado.Focus();
             }
         }
 
@@ -141,7 +176,10 @@ namespace abcCompleto
             dtFecha.Text = string.Empty;
             cbRol.SelectedIndex = -1;
             cbTipo.SelectedIndex = -1;
+            btnAgregarMov.IsEnabled = false;
             imgUser.Source = objControlador.CargarImagenDefalut();
+            txtSalario.Text = "default 7200.00";
+            chkSalario.IsChecked = false;
             if (bLimpiarCompleto)
             {
                 txtNoEmpleado.Clear();
@@ -170,28 +208,98 @@ namespace abcCompleto
                 imgUser.Source = objCam.imgRetorna.Source;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
         private void txtNoEmpleado_KeyDown(object sender, KeyEventArgs e)
         {
-            if (txtNoEmpleado.Text == string.Empty)
+            if (e.Key == Key.F1)
             {
-                if (e.Key == Key.Tab)
+                frmBusqueda x = new frmBusqueda();
+                x.ShowDialog();
+                txtNoEmpleado.Text = x.sNumEmpleado;
+                txtNoEmpleado_LostFocus(sender, e);
+            }
+        }
+
+        private void btnAgregarMov_Click(object sender, RoutedEventArgs e)
+        {
+            int idrol = objControlador.RetornarIdRol(cbRol.SelectedValue.ToString());
+            int idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString());
+            frmMovimientos objMovimientos = new frmMovimientos(txtNoEmpleado.Text, txtNombre.Text, Convert.ToInt32(txtNoEmpleado.Text), idrol, idtipo);
+            objMovimientos.ShowDialog();
+        }
+
+        private void chkSalario_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtSalario.IsEnabled = false;
+            txtSalario.Text = "default 7200.00";
+        }
+
+        private void chkSalario_Checked(object sender, RoutedEventArgs e)
+        {
+            txtSalario.IsEnabled = true;
+            var salario = objControlador.BuscarSalario(Convert.ToInt32(txtNoEmpleado.Text));
+
+            if (salario.Count > 0)
+            {
+                foreach (var datos in salario)
                 {
-                    e.Handled = true;
-                }
-                else if (e.Key == Key.F1) 
-                {
-                    frmBusqueda x = new frmBusqueda();
-                    x.ShowDialog();
-                    txtNoEmpleado.Text = x.sNumEmpleado;
-                    txtNoEmpleado_LostFocus(sender, e);
+                    txtSalario.Text = datos.salario_mensual.ToString();
                 }
             }
         }
+
+        private void txtNoEmpleado_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (txtNoEmpleado.Text == string.Empty && e.NewFocus != tiMovimientos && e.NewFocus != txtBusquedaEmp)
+            {
+                MessageBox.Show("Ingrese un numero de empleado", "Error", MessageBoxButton.OK);
+                e.Handled = true;
+            }
+            else if (e.NewFocus == txtBusquedaEmp) 
+            {
+                e.Handled = true;
+            }
+        }
+
+        //MOVIMIENTOS
+
+        private void tiMovimientos_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtBusquedaEmp.Text = txtNoEmpleado.Text;
+            lblNombreCompleto.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;
+            dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();
+        }
+
+        private void txtBusquedaEmp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) 
+            {
+                if (txtBusquedaEmp.Text != string.Empty)
+                {
+                    var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
+                    lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
+                    dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos(Convert.ToInt32(txtBusquedaEmp.Text));
+                }
+                else 
+                {
+                    lblNombreCompleto.Content = "";
+                    dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();
+                }
+                
+            }
+            else if (e.Key == Key.F1)
+            {
+                frmBusqueda x = new frmBusqueda();
+                x.ShowDialog();
+                txtBusquedaEmp.Text = x.sNumEmpleado;
+                var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
+                lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
+                txtBusquedaEmp_KeyDown(sender, new KeyEventArgs(Keyboard.PrimaryDevice,
+                                                   Keyboard.PrimaryDevice.ActiveSource,
+                                                   0, Key.Enter));
+            }
+        }
+
+
 
     }
 }

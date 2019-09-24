@@ -25,10 +25,10 @@ namespace abcCompleto
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RolABC> RolABC { get; set; }
         public virtual DbSet<TipoABC> TipoABC { get; set; }
         public virtual DbSet<MovimientosABC> MovimientosABC { get; set; }
-        public virtual DbSet<SalarioABC> SalarioABC { get; set; }
+        public virtual DbSet<RolABC> RolABC { get; set; }
         public virtual DbSet<EmpleadoABC> EmpleadoABC { get; set; }
+        public virtual DbSet<SalarioABC> SalarioABC { get; set; }
     }
 }

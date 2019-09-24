@@ -21,18 +21,21 @@ namespace abcCompleto
     /// </summary>
     public partial class frmBusqueda : Window
     {
-        public string sNumEmpleado;      
+        public string sNumEmpleado;
+        clsBusqueda objControlador;
+
         public frmBusqueda()
         {
             InitializeComponent();
+            objControlador = new clsBusqueda();
             sNumEmpleado = string.Empty;
             txtBusquedaEmp.Focus();
         }
-        clsRN objCale = new clsRN();
+
         private void txtBusquedaEmp_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtBusquedaEmp.Text != string.Empty)
-                dtgEmpleados.ItemsSource = objCale.BuscarEmpleadoLike(txtBusquedaEmp.Text);
+                dtgEmpleados.ItemsSource = objControlador.BuscarEmpleado(txtBusquedaEmp.Text);
             else
                 dtgEmpleados.ItemsSource = null;
         }
@@ -45,9 +48,13 @@ namespace abcCompleto
 
         private void dtgEmpleados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DatosEmpleado row = dtgEmpleados.SelectedItem as DatosEmpleado;
-            sNumEmpleado = row.idNumEmpleado.ToString();
-            this.Close();
+            try
+            {
+                clsBusqueda row = dtgEmpleados.SelectedItem as clsBusqueda;
+                sNumEmpleado = row._IdNumEmpleado.ToString();
+                this.Close();
+            }
+            catch { }
         }
 
 

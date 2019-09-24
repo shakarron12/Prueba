@@ -1,8 +1,57 @@
-﻿<Window x:Class="abcCompleto.frmMovimientos"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="frmMovimientos" Height="600" Width="800">
-    <Grid>
-        
+        xmlns:local="clr-namespace:abcCompleto" x:Name="frmMovimientos1" x:Class="abcCompleto.frmMovimientos"
+        Title="frmMovimientos" Height="311.5" Width="655" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyDown="frmMovimientos1_KeyDown">
+    <Grid Name="GridControles" Margin="0,0,-1,0" Height="283" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Numero de Empleado: " HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nombre: " HorizontalAlignment="Left" Margin="9,48,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fecha:" HorizontalAlignment="Left" Margin="9,85,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="161,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="4" Text="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <TextBox.DataContext>
+                <local:MovimientosABC/>
+            </TextBox.DataContext>
+        </TextBox>
+        <DatePicker x:Name="dtFecha" HorizontalAlignment="Left" Height="25" Margin="161,88,0,0" VerticalAlignment="Top" Width="156" TabIndex="3"/>
+        <TextBox x:Name="txtNumeroEmp" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" IsEnabled="False"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="161,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2"/>
+        <Label Content="Cantidad de Entregas:" HorizontalAlignment="Left" Margin="9,127,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="chkCubrioTurno" Content="Cubrio Turno" HorizontalAlignment="Left" Margin="355,54,0,0" VerticalAlignment="Top" IsHitTestVisible="True" Visibility="Hidden" Checked="chkCubrioTurno_Checked" Unchecked="chkCubrioTurno_Unchecked"/>
+        <Border Margin="10,182,331,40" BorderBrush="DarkBlue" BorderThickness="1">
+            <Grid Margin="0,-1,0,0" x:Name="GridRol_Copy">
+                <Label x:Name="lblNoEmpleado_Copy1" Content="Rol:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="38" Margin="28,15,0,0"/>
+                <ComboBox x:Name="cbRol" HorizontalAlignment="Left" Margin="119,15,0,0" VerticalAlignment="Top" Width="156" Height="23" TabIndex="8" IsEnabled="False">
+                    <ComboBox.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0.63"/>
+                        </LinearGradientBrush>
+                    </ComboBox.Background>
+                </ComboBox>
+                <Border Margin="316,0,-318,-1" BorderBrush="DarkBlue" BorderThickness="1">
+                    <Grid Margin="0,-1,0,0" x:Name="GridRol_Copy1">
+                        <Label x:Name="lblNoEmpleado_Copy2" Content="Tipo:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="38" Margin="28,15,0,0"/>
+                        <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" Margin="119,15,0,0" VerticalAlignment="Top" Width="156" Height="23" TabIndex="8" IsEnabled="False">
+                            <ComboBox.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0.63"/>
+                                </LinearGradientBrush>
+                            </ComboBox.Background>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Button x:Name="btnSubir" Content="▲" Margin="281,127,0,0" VerticalAlignment="Top" Width="14" Height="12" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="6" Click="btnSubir_Click"/>
+        <Button x:Name="btnBajar" Content="▼" Margin="281,139,0,0" VerticalAlignment="Top" Width="14" Height="11" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="6" Click="btnBajar_Click"/>
+        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="10,251,0,12" Width="160" Click="btnGuardar_Click" TabIndex="10"/>
+        <Button x:Name="btnModificar" Content="Modificar Movimiento" HorizontalAlignment="Left" Margin="240,251,0,12" Width="160" TabIndex="10" Click="btnModificar_Click"/>
+        <Button x:Name="btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="468,250,0,13" Width="168" TabIndex="10" Click="btnSalir_Click"/>
     </Grid>
 </Window>

@@ -20,6 +20,7 @@ namespace abcCompleto
         }
     
         public int idrol { get; set; }
+        public Nullable<double> bono { get; set; }
         public string desc_rol { get; set; }
     
         public virtual ICollection<EmpleadoABC> EmpleadoABC { get; set; }

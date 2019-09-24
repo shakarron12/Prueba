@@ -31,15 +31,15 @@
       <PropertyRef Name="idrol" />
     </Key>
     <Property Name="idrol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bono" Type="float" />
     <Property Name="desc_rol" Type="varchar" MaxLength="20" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Ropa.dbo.SalarioABC' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="SalarioABC">
     <Key>
-      <PropertyRef Name="idNumEmpleado" />
+      <PropertyRef Name="idSalario" />
     </Key>
-    <Property Name="idNumEmpleado" Type="int" Nullable="false" />
+    <Property Name="idSalario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idNumEmpleado" Type="int" />
     <Property Name="salario_mensual" Type="float" />
   </EntityType>
   <EntityType Name="TipoABC">
@@ -86,8 +86,8 @@ advertencia 6002: La tabla o vista 'Ropa.dbo.SalarioABC' no tiene definida ningu
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SalarioABC_EmpleadoABC">
-    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
-    <End Role="SalarioABC" Type="Self.SalarioABC" Multiplicity="0..1" />
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="0..1" />
+    <End Role="SalarioABC" Type="Self.SalarioABC" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EmpleadoABC">
         <PropertyRef Name="idNumEmpleado" />
@@ -101,13 +101,8 @@ advertencia 6002: La tabla o vista 'Ropa.dbo.SalarioABC' no tiene definida ningu
     <EntitySet Name="EmpleadoABC" EntityType="Self.EmpleadoABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MovimientosABC" EntityType="Self.MovimientosABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolABC" EntityType="Self.RolABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalarioABC" EntityType="Self.SalarioABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoABC" EntityType="Self.TipoABC" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SalarioABC" EntityType="Self.SalarioABC" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [SalarioABC].[idNumEmpleado] AS [idNumEmpleado], 
-    [SalarioABC].[salario_mensual] AS [salario_mensual]
-    FROM [dbo].[SalarioABC] AS [SalarioABC]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="Self.FK_EmpleadosABC_RolABC">
       <End Role="RolABC" EntitySet="RolABC" />
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />

@@ -32,7 +32,7 @@
                                     <Image x:Name="imgUser" Stretch="Fill" Source="imagenes/user.ico" Margin="0,10,0,53"/>
                                 </Grid>
                             </Border>
-                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown"/>
+                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown" PreviewLostKeyboardFocus="txtNoEmpleado_PreviewLostKeyboardFocus"/>
                             <Label x:Name="lblNoEmpleado" Content="No. Empleado" HorizontalAlignment="Left" Margin="26,15,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="130,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="20" MaxLines="1" TabIndex="2"/>
                             <Label x:Name="lblNoEmpleado_Copy" Content="Nombre:" HorizontalAlignment="Left" Margin="26,61,0,0" VerticalAlignment="Top"/>
@@ -46,6 +46,10 @@
                             <Label x:Name="lblNoEmpleado_Copy4" Content="Curp:" HorizontalAlignment="Left" Margin="26,222,0,0" VerticalAlignment="Top"/>
                             <DatePicker x:Name="dtFecha" HorizontalAlignment="Left" Height="25" Margin="130,258,0,0" VerticalAlignment="Top" Width="156" TabIndex="7"/>
                             <Label x:Name="lblNoEmpleado_Copy5" Content ="Fecha Nac:" HorizontalAlignment="Left" Margin="26,258,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lblSalario" Content ="Salario:" HorizontalAlignment="Left" Margin="26,298,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txtSalario" HorizontalAlignment="Left" Height="23" Margin="130,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" TabIndex="6" Text="default 7200.00" IsEnabled="False"/>
+                            <CheckBox x:Name="chkSalario" Content="Modificar Salario
+                                      " Margin="300,300,336,23" Unchecked="chkSalario_Unchecked" Checked="chkSalario_Checked"></CheckBox>
                         </Grid>
                     </Border>
                     <Border Grid.ColumnSpan="4" Margin="10,394,91,88" BorderBrush="DarkBlue" BorderThickness="1">
@@ -79,22 +83,24 @@
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top" Width="206" Grid.ColumnSpan="4" Click="btnGuardar_Click" TabIndex="10"/>
                     <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="144,476,0,0" VerticalAlignment="Top" Width="206" Grid.Column="3" Grid.ColumnSpan="2" Click="btnEliminar_Click" TabIndex="11"/>
                     <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="126,476,0,0" VerticalAlignment="Top" Width="206" Grid.Column="4" Grid.ColumnSpan="2" Click="btnLimpiar_Click" TabIndex="17"/>
-                    <Button Content="Agregar Movimientos" Grid.Column="4" Height="30" Margin="160,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,0.504" Click="Button_Click"/>
+                    <Button x:Name="btnAgregarMov" Content="Agregar Movimientos" Grid.Column="4" Height="30" Margin="160,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,0.504" Click="btnAgregarMov_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Movimientos">
-                <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,12,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <DataGrid Margin="8,77,12,0" VerticalAlignment="Top" Height="423">
+            <TabItem x:Name="tiMovimientos" Header="Movimientos" GotFocus="tiMovimientos_GotFocus">
+                <Grid Background="#FFE5E5E5" Name="gridMovimientos">
+                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="txtBusquedaEmp_KeyDown"/>
+                    <DataGrid x:Name="dtgCalcMovimientos"   AutoGenerateColumns="False" IsTextSearchEnabled="False" HeadersVisibility="Column" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" GridLinesVisibility="None" IsReadOnly="True" IsManipulationEnabled="True" Margin="8,77,12,0" VerticalAlignment="Top" Height="423">
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding chkd}" Width="25"/>
-                            <DataGridTextColumn Binding="{Binding descTipoUsuario}" Header="#" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ISR" SortMemberPath="isr"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Vales" SortMemberPath="vales"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Sueldo Nto" SortMemberPath="sueldoNto"/>
+                            <DataGridTextColumn Binding="{Binding _NumEmpleado}" Header="# Empleado" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>
+                            <DataGridTextColumn Binding="{Binding _Isr}" Header="ISR" SortMemberPath="isr" Width="*" />
+                            <DataGridTextColumn Binding="{Binding _Vales}" Header="Vales" SortMemberPath="vales" Width="*" />
+                            <DataGridTextColumn Binding="{Binding _SueldoBrto}" Header="Sueldo Bruto" SortMemberPath="sueldoBrto" Width="*" />
+                            <DataGridTextColumn Binding="{Binding _SueldoNto}" Header="Sueldo Nto" SortMemberPath="sueldoNto" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label x:Name="lblBusqueda" Content="Buscar Empleado" HorizontalAlignment="Left" Margin="8,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblBusqueda" Content="Num. Empleado:" HorizontalAlignment="Left" Margin="8,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblNumEmpleado" Content="Nombre Emp:" HorizontalAlignment="Left" Margin="398,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblNombreCompleto" Content="" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="290"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -14,7 +14,8 @@ namespace abcCompleto
     
     public partial class SalarioABC
     {
-        public int idNumEmpleado { get; set; }
+        public int idSalario { get; set; }
+        public Nullable<int> idNumEmpleado { get; set; }
         public Nullable<double> salario_mensual { get; set; }
     
         public virtual EmpleadoABC EmpleadoABC { get; set; }

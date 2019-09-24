@@ -1,0 +1,30 @@
+﻿<Window x:Name="frmBusqueda" x:Class="abcCompleto.frmBusquedaMovimientos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="frmBusquedaMovimientos" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyDown="frmBusqueda_KeyDown">
+    <Grid x:Name="gdControles" Background="#FFE5E5E5" Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="313*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblBusqueda" Content="Buscar Movimiento de:" HorizontalAlignment="Left" Margin="8,22,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="135"/>
+        <DataGrid x:Name="dtgMovimientos" AutoGenerateColumns="False" IsTextSearchEnabled="False" Margin="8,77,10,0" VerticalAlignment="Top" Height="282" HeadersVisibility="Column" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" GridLinesVisibility="None" IsReadOnly="True" IsManipulationEnabled="True" Grid.ColumnSpan="2" Panel.ZIndex="2" TabIndex="2" MouseDoubleClick="dtgMovimientos_MouseDoubleClick">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding _IdMovimiento}" Header="NumEmpleado" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>
+                <DataGridTextColumn Binding="{Binding _INumEmpleado}" ClipboardContentBinding="{x:Null}" Header="NumEmpleado" SortMemberPath="NumEmpleado" Width="*"/>
+                <DataGridTextColumn Binding="{Binding sNombreCompleto}" ClipboardContentBinding="{x:Null}" Header="Nombre Completo" SortMemberPath="NomCompleto" Width="*"/>
+                <DataGridTextColumn Binding="{Binding _DtFecha}" ClipboardContentBinding="{x:Null}" Header="Fecha" SortMemberPath="Fecha" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DatePicker x:Name="dtFechaInicio" Grid.Column="1" HorizontalAlignment="Left" Margin="40,22,0,0" VerticalAlignment="Top" Width="150"/>
+        <DatePicker x:Name="dtFechaFin" Grid.Column="1" HorizontalAlignment="Left" Margin="229,22,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label x:Name="lblBusqueda_Copy" Content="a:" HorizontalAlignment="Left" Margin="202,22,0,0" VerticalAlignment="Top" Width="21" Grid.Column="1"/>
+        <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="304,51,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btnBuscar_Click"/>
+    </Grid>
+</Window>

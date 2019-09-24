@@ -70,17 +70,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="clsAbc.cs" />
-    <Compile Include="clsRN.cs" />
-    <Compile Include="DateTable.cs" />
+    <Compile Include="Clases\clsBusquedaMovimiento.cs" />
+    <Compile Include="Clases\clsCalculoMovimiento.cs" />
+    <Compile Include="Clases\clsEmpleado.cs" />
+    <Compile Include="Clases\clsBusqueda.cs" />
+    <Compile Include="Clases\clsPrincipal.cs" />
+    <Compile Include="Clases\clsMovimiento.cs" />
+    <Compile Include="Clases\clsRN.cs" />
     <Compile Include="EmpleadoABC.cs">
       <DependentUpon>odbBodega.tt</DependentUpon>
     </Compile>
     <Compile Include="frmBusqueda.xaml.cs">
       <DependentUpon>frmBusqueda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmBusquedaMovimientos.xaml.cs">
+      <DependentUpon>frmBusquedaMovimientos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmCam.xaml.cs">
       <DependentUpon>frmCam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmModificarMovimientos.xaml.cs">
+      <DependentUpon>frmModificarMovimientos.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmMovimientos.xaml.cs">
       <DependentUpon>frmMovimientos.xaml</DependentUpon>
@@ -102,17 +112,19 @@
     <Compile Include="TipoABC.cs">
       <DependentUpon>odbBodega.tt</DependentUpon>
     </Compile>
-    <Compile Include="VentanaDePrueba.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VentanaDePrueba.Designer.cs">
-      <DependentUpon>VentanaDePrueba.cs</DependentUpon>
-    </Compile>
     <Page Include="frmBusqueda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmBusquedaMovimientos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmCam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmModificarMovimientos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,18 +193,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="imagenes\adduser.ico" />
-    <Resource Include="imagenes\business_application_addmale_useradd_insert_add_user_client_2312.ico" />
-    <Resource Include="imagenes\delete_delete_deleteusers_delete_male_user_maleclient_2348.ico" />
-    <Resource Include="imagenes\user_add_21977.ico" />
-    <Resource Include="imagenes\webcam.ico" />
-    <Resource Include="imagenes\windows_explorer_29659.ico" />
+    <Resource Include="Imagenes\adduser.ico" />
+    <Resource Include="Imagenes\business_application_addmale_useradd_insert_add_user_client_2312.ico" />
+    <Resource Include="Imagenes\delete_delete_deleteusers_delete_male_user_maleclient_2348.ico" />
+    <Resource Include="Imagenes\user_add_21977.ico" />
+    <Resource Include="Imagenes\webcam.ico" />
+    <Resource Include="Imagenes\windows_explorer_29659.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="imagenes\user.ico" />
+    <Resource Include="Imagenes\user.ico" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

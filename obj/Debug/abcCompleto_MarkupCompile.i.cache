@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\xicotencatl.lopez\documents\visual studio 2013\Projects\abcCompleto\App.xaml
-4-1395603248
+6-290225008
 21671543772
-25593835997
+291582057293
 211097738688
-frmBusqueda.xaml;frmCam.xaml;frmMovimientos.xaml;frmPrincipal.xaml;
+frmBusqueda.xaml;frmBusquedaMovimientos.xaml;frmCam.xaml;frmModificarMovimientos.xaml;frmMovimientos.xaml;frmPrincipal.xaml;
 
-False
+True
 

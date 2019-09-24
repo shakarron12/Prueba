@@ -1,32 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="RopaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="RolABC">
-    <Key>
-      <PropertyRef Name="idrol" />
-    </Key>
-    <Property Name="idrol" Type="Int32" Nullable="false" />
-    <Property Name="desc_rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC1" FromRole="RolABC" ToRole="EmpleadoABC" />
-  </EntityType>
   <EntityType Name="TipoABC">
     <Key>
       <PropertyRef Name="idtipo" />
     </Key>
     <Property Name="idtipo" Type="Int32" Nullable="false" />
     <Property Name="desc_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC1" FromRole="TipoABC" ToRole="EmpleadoABC" />
+    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC" FromRole="TipoABC" ToRole="EmpleadoABC" />
   </EntityType>
   <EntityContainer Name="odbBodegaPrueba" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="RolABC" EntityType="Self.RolABC" />
     <EntitySet Name="TipoABC" EntityType="Self.TipoABC" />
     <EntitySet Name="MovimientosABC" EntityType="RopaModel.MovimientosABC" />
-    <EntitySet Name="SalarioABC" EntityType="RopaModel.SalarioABC" />
+    <EntitySet Name="RolABC" EntityType="RopaModel.RolABC" />
     <EntitySet Name="EmpleadoABC" EntityType="RopaModel.EmpleadoABC" />
-    <AssociationSet Name="FK_EmpleadosABC_RolABC1" Association="RopaModel.FK_EmpleadosABC_RolABC1">
+    <AssociationSet Name="FK_EmpleadosABC_RolABC" Association="RopaModel.FK_EmpleadosABC_RolABC">
       <End Role="RolABC" EntitySet="RolABC" />
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
     </AssociationSet>
-    <AssociationSet Name="FK_EmpleadosABC_TipoABC1" Association="RopaModel.FK_EmpleadosABC_TipoABC1">
+    <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="RopaModel.FK_EmpleadosABC_TipoABC">
       <End Role="TipoABC" EntitySet="TipoABC" />
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
     </AssociationSet>
@@ -34,6 +25,7 @@
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
       <End Role="MovimientosABC" EntitySet="MovimientosABC" />
     </AssociationSet>
+    <EntitySet Name="SalarioABC" EntityType="RopaModel.SalarioABC" />
     <AssociationSet Name="FK_SalarioABC_EmpleadoABC" Association="RopaModel.FK_SalarioABC_EmpleadoABC">
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
       <End Role="SalarioABC" EntitySet="SalarioABC" />
@@ -51,13 +43,14 @@
     <Property Name="fecha_movimiento" Type="DateTime" Precision="3" />
     <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_MovimientosABC_EmpleadoABC" FromRole="MovimientosABC" ToRole="EmpleadoABC" />
   </EntityType>
-  <EntityType Name="SalarioABC">
+  <EntityType Name="RolABC">
     <Key>
-      <PropertyRef Name="idNumEmpleado" />
+      <PropertyRef Name="idrol" />
     </Key>
-    <Property Name="idNumEmpleado" Type="Int32" Nullable="false" />
-    <Property Name="salario_mensual" Type="Double" />
-    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="SalarioABC" ToRole="EmpleadoABC" />
+    <Property Name="idrol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bono" Type="Double" />
+    <Property Name="desc_rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC" FromRole="RolABC" ToRole="EmpleadoABC" />
   </EntityType>
   <EntityType Name="EmpleadoABC">
     <Key>
@@ -73,12 +66,12 @@
     <Property Name="idrol" Type="Int32" Nullable="false" />
     <Property Name="idtipo" Type="Int32" Nullable="false" />
     <Property Name="img_usuario" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <NavigationProperty Name="RolABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC1" FromRole="EmpleadoABC" ToRole="RolABC" />
-    <NavigationProperty Name="TipoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC1" FromRole="EmpleadoABC" ToRole="TipoABC" />
+    <NavigationProperty Name="RolABC" Relationship="RopaModel.FK_EmpleadosABC_RolABC" FromRole="EmpleadoABC" ToRole="RolABC" />
+    <NavigationProperty Name="TipoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC" FromRole="EmpleadoABC" ToRole="TipoABC" />
     <NavigationProperty Name="MovimientosABC" Relationship="RopaModel.FK_MovimientosABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="MovimientosABC" />
     <NavigationProperty Name="SalarioABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="SalarioABC" />
   </EntityType>
-  <Association Name="FK_EmpleadosABC_RolABC1">
+  <Association Name="FK_EmpleadosABC_RolABC">
     <End Type="RopaModel.RolABC" Role="RolABC" Multiplicity="1" />
     <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="*" />
     <ReferentialConstraint>
@@ -90,7 +83,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EmpleadosABC_TipoABC1">
+  <Association Name="FK_EmpleadosABC_TipoABC">
     <End Type="RopaModel.TipoABC" Role="TipoABC" Multiplicity="1" />
     <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="*" />
     <ReferentialConstraint>
@@ -114,9 +107,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="SalarioABC">
+    <Key>
+      <PropertyRef Name="idSalario" />
+    </Key>
+    <Property Name="idSalario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idNumEmpleado" Type="Int32" />
+    <Property Name="salario_mensual" Type="Double" />
+    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="SalarioABC" ToRole="EmpleadoABC" />
+  </EntityType>
   <Association Name="FK_SalarioABC_EmpleadoABC">
-    <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
-    <End Type="RopaModel.SalarioABC" Role="SalarioABC" Multiplicity="0..1" />
+    <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="0..1" />
+    <End Type="RopaModel.SalarioABC" Role="SalarioABC" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EmpleadoABC">
         <PropertyRef Name="idNumEmpleado" />
