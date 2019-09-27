@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -198,16 +199,16 @@ namespace abcCompleto
 
         }
 
-        protected int RetornarValesRN(int iNumEmpleado)
+        protected ArrayList RetornarValesRN(int iNumEmpleado)
         {
-            int valestotales = 0;
+            ArrayList valestotales = new ArrayList();
             List<MovimientosABC> valesTotalesEmpleado = (from a in odb.MovimientosABC
                                                          where a.idnumempleado == iNumEmpleado
                                                          select a).ToList();
 
             foreach (MovimientosABC movimiento in valesTotalesEmpleado)
             {
-                valestotales = (int)movimiento.cant_entregas;
+                valestotales.Add((int)movimiento.cant_entregas);
             }
             return valestotales;
         }

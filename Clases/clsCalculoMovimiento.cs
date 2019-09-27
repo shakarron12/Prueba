@@ -8,40 +8,47 @@ namespace abcCompleto
 {
     class clsCalculoMovimiento : clsEmpleado
     {
-        private Int32 numEmpleado;
-        private double sueldoNto;
-        private int sueldoBrto;
-        private int vales;
-        private double isr;
+        private Int32 iNumEmpleado;
+        private double iSueldoNto;
+        private int iSueldoBrto;
+        private int iVales;
+        private double dIsr;
+        private int iBono;
 
         public Int32 _NumEmpleado
         {
-            get { return numEmpleado; }
-            set { numEmpleado = value; }
+            get { return iNumEmpleado; }
+            set { iNumEmpleado = value; }
         }
    
         public double _Isr
         {
-            get { return isr; }
-            set { isr = value; }
+            get { return dIsr; }
+            set { dIsr = value; }
         }
 
         public int _Vales
         {
-            get { return vales; }
-            set { vales = value; }
+            get { return iVales; }
+            set { iVales = value; }
         }
         
         public int _SueldoBrto
         {
-            get { return sueldoBrto; }
-            set { sueldoBrto = value; }
+            get { return iSueldoBrto; }
+            set { iSueldoBrto = value; }
         }
     
         public double _SueldoNto
         {
-            get { return sueldoNto; }
-            set { sueldoNto = value; }
+            get { return iSueldoNto; }
+            set { iSueldoNto = value; }
+        }
+
+        public int _IBono
+        {
+            get { return iBono; }
+            set { iBono = value; }
         }
 
         public clsCalculoMovimiento() 
