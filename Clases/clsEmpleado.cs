@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -7,13 +9,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Data.Entity.Core;
 
 namespace abcCompleto
 {
-    public abstract class clsEmpleado : clsRN
+    public abstract class clsEmpleado : clsRN 
     {
         public clsEmpleado() 
         {
+        }
+
+        internal bool VerificarConexionPrin()
+        {
+            return VerificarConexionRN();
         }
 
         internal bool ValidarControlesVacios(UIElementCollection uiControles)
@@ -69,109 +77,308 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        //EMPLEADOS
         internal List<EmpleadoABC> BuscarEmpleado(int iNumEmpleado) 
         {
-            return BuscarEmpleadoRN(iNumEmpleado);
+            List<abcCompleto.EmpleadoABC> empleado = new List<EmpleadoABC>();
+            try
+            {
+                empleado = BuscarEmpleadoRN(iNumEmpleado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return empleado;
         }
 
-        internal bool EliminarEmpleado(int iNumEmpleado) 
+        internal bool EliminarEmpleado(int iNumEmpleado)
         {
-            return EliminarEmpleadoRN(iNumEmpleado);
+            bool bRegresa = false;
+            try
+            {
+                EliminarEmpleadoRN(iNumEmpleado);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
-        internal bool GuardarEmpleado(EmpleadoABC empleado) 
+        internal bool GuardarEmpleado(EmpleadoABC empleado)
         {
-           return GuardarEmpleadoRN(empleado);
+            bool bRegresa = false;
+            try
+            {
+                GuardarEmpleadoRN(empleado);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal bool ActualizarEmpleado(EmpleadoABC empleado)
         {
-            return ActualizarEmpleadoRN(empleado);
+            bool bRegresa = false;
+            try
+            {
+                ActualizarEmpleadoRN(empleado);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal List<string> RetornarRoles()
         {
-            return llenarComboRolRN();
+            List<string> roles = new List<string>();
+            try
+            {
+                roles = llenarComboRolRN();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return roles;
         }
 
         internal List<string> RetornarTipos()
         {
-            return LlenarComboTipoRN();
+            List<string> tipos = new List<string>();
+            try
+            {
+                tipos = LlenarComboTipoRN();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return tipos;
         }
 
-        internal int RetornarIdRol(string sNombreRol) 
+        internal int RetornarIdRol(string sNombreRol)
         {
-            return RetornaridRolRN(sNombreRol);
+            int iRol = 0;
+            try
+            {
+                iRol = RetornaridRolRN(sNombreRol);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return iRol;
         }
 
         internal int RetornarIdTipo(string sNombreTipo)
         {
-            return RetornaridTipoRN(sNombreTipo);
+            int iTipo = 0;
+            try
+            {
+                iTipo = RetornaridTipoRN(sNombreTipo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return iTipo;
         }
 
         internal List<clsBusqueda> BuscarEmpleado(string sEmpleado)
         {
-            return BuscarEmpleadoLikeRN(sEmpleado);
+            List<abcCompleto.clsBusqueda> empleados = new List<clsBusqueda>();
+            try
+            {
+                empleados = BuscarEmpleadoLikeRN(sEmpleado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return empleados;
         }
 
         //MOVIIMIENTOS 
-         
+
         internal bool EliminarMovimiento(int iNumMovimiento)
         {
-            return EliminarMovimientoRN(iNumMovimiento);
+            bool bRegresa = false;
+            try
+            {
+                EliminarMovimientoRN(iNumMovimiento);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal bool GuardarMovimiento(MovimientosABC movimiento)
         {
-            return GuardarMovimientoRN(movimiento);
+            bool bRegresa = false;
+            try
+            {
+                GuardarMovimientoRN(movimiento);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return bRegresa;
         }
 
         internal bool ActualizarMovimiento(MovimientosABC movimiento)
         {
-            return ActualizarMovimientoRN(movimiento);
+            bool bRegresa = false;
+            try
+            {
+                ActualizarMovimientoRN(movimiento);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal List<clsBusquedaMovimiento> BuscarMovimientoLike(int iNumEmpleado, DateTime dtFechaInicio, DateTime dtFechaFin)
         {
-            return BuscarMovimientoLikeRN(iNumEmpleado, dtFechaInicio, dtFechaFin);
+            List<clsBusquedaMovimiento> movimiento = new List<clsBusquedaMovimiento>();
+
+            try
+            {
+                movimiento = BuscarMovimientoLikeRN(iNumEmpleado, dtFechaInicio, dtFechaFin);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return movimiento;
         }
 
         internal List<clsMovimiento> BuscarMovimiento(int iNumMovimiento)
         {
-            return BuscarMovimientoRN(iNumMovimiento);
+            List<clsMovimiento> movimiento = new List<clsMovimiento>();
+
+            try
+            {
+                movimiento = BuscarMovimientoRN(iNumMovimiento);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return movimiento;
         }
 
-        internal int retornarVales(int iNumEmpleado) 
+        internal int retornarVales(int iNumEmpleado)
         {
-            return RetornarValesRN(iNumEmpleado);
+            int valestotales = 0;
+            try
+            {
+                List<MovimientosABC> valesTotalesEmpleado = RetornarValesRN(iNumEmpleado);
+                foreach (MovimientosABC movimiento in valesTotalesEmpleado)
+                {
+                    valestotales += (int)movimiento.cant_entregas;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return valestotales;
         }
 
         //SALARIOS
         internal List<SalarioABC> BuscarSalario(int iNumEmp)
         {
-            return BuscarSalarioRN(iNumEmp);
+            List<abcCompleto.SalarioABC> salario = new List<SalarioABC>();
+            try
+            {
+                salario = BuscarSalarioRN(iNumEmp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return salario;
         }
 
-        internal List<SalarioABC> BuscarSalarios(int iNumEmp)
+        internal List<SalarioABC> BuscarSalarios()
         {
-            return BuscarSalariosTotalesRN();
+            List<abcCompleto.SalarioABC> salarios = new List<SalarioABC>();
+
+            try
+            {
+                salarios = BuscarSalariosTotalesRN();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return salarios;
         }
 
         internal bool EliminarSalario(int iNumEmpleado)
         {
-            return EliminarSalarioRN(iNumEmpleado);
+            bool bRegresa = false;
+            try
+            {
+                EliminarSalarioRN(iNumEmpleado);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal bool GuardarSalario(SalarioABC movimiento)
         {
-            return GuardarSalarioRN(movimiento);
+            bool bRegresa = false;
+            try
+            {
+                GuardarSalarioRN(movimiento);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
 
         internal bool ActualizarSalario(SalarioABC movimiento)
         {
-            return ActualizarSalarioRN(movimiento);
+            bool bRegresa = false;
+            try
+            {
+               ActualizarSalarioRN(movimiento);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
         }
-
-       
     }
 }

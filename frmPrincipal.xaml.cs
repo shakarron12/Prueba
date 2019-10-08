@@ -19,9 +19,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ConvertImage;
 using System.Runtime.InteropServices;
+using System.Net;
 
 namespace abcCompleto
 {
+    public struct Conexion
+    {
+        public static string sIp = string.Empty;
+        public static string sUsuario = string.Empty;
+        public static string sDB = string.Empty;
+        public static string sContraseña = string.Empty;
+    }
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
@@ -33,13 +41,72 @@ namespace abcCompleto
         clsCalculoMovimiento objControladorMovimientos;
         public MainWindow()
         {
+            
             InitializeComponent();
-            objControlador = new clsPrincipal();
-            objControladorMovimientos = new clsCalculoMovimiento();
-            bExiste = false;
-            txtNoEmpleado.Focus();
-            cbRol.ItemsSource = objControlador.RetornarRoles();
-            cbTipo.ItemsSource = objControlador.RetornarTipos();
+            if (CargarArchivoConfig())
+            {
+                objControlador = new clsPrincipal();
+                if (objControlador.VerificarConexion())
+                {
+                    objControladorMovimientos = new clsCalculoMovimiento();
+                    bExiste = false;
+                    txtNoEmpleado.Focus();
+                    cbRol.ItemsSource = objControlador.RetornarRoles();
+                    if (cbRol.Items.Count > 0)
+                    {
+                        cbTipo.ItemsSource = objControlador.RetornarTipos();
+                    }
+                }
+                else 
+                {
+                    MessageBox.Show("No hay una conexion establecida, verificar archivo de configuracion.");
+                    this.Close();
+                }
+            }
+            else 
+            {
+                this.Close();
+            }
+           
+        }
+
+        internal bool CargarArchivoConfig()
+        {
+            bool bRegresa = false;
+            try
+            {
+                using (StreamReader reader = new StreamReader(@"abcDat.txt"))
+                {
+                    string[] line = reader.ReadToEnd().Split('\n');
+
+                    if ((Conexion.sIp = ValidaIP(line[0].Trim()) == true ? line[0].Trim() : string.Empty) != string.Empty)
+                    {
+                        Conexion.sDB = line[1].Trim();
+                        Conexion.sUsuario = line[2].Trim();
+                        Conexion.sContraseña = line[3].Trim();
+                        bRegresa = true;
+                    }
+                    else 
+                    {
+                        throw new Exception("La direccion ip no es valida.");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
+        }
+
+        private static bool ValidaIP(string sIP)
+        {
+            try
+            { IPAddress ip = IPAddress.Parse(sIP); }
+            catch
+            { return false; }
+
+            return true;
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -117,8 +184,8 @@ namespace abcCompleto
         {
             if (txtNoEmpleado.Text != string.Empty)
             {
-                txtNoEmpleado.IsEnabled = false;
                 var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtNoEmpleado.Text));
+                txtNoEmpleado.IsEnabled = false;
 
                 if (empleado.Count > 0)
                 {
@@ -151,7 +218,7 @@ namespace abcCompleto
                 }
                 else
                 {
-                    txtNoEmpleado.Focus();
+                    txtNombre.Focus();
                 }
             }
             else
@@ -217,6 +284,10 @@ namespace abcCompleto
                 txtNoEmpleado.Text = x.sNumEmpleado;
                 txtNoEmpleado_LostFocus(sender, e);
             }
+            else if (e.Key == Key.Enter) 
+            {
+                txtNoEmpleado_LostFocus(sender, e);
+            }
         }
 
         private void btnAgregarMov_Click(object sender, RoutedEventArgs e)
@@ -276,8 +347,18 @@ namespace abcCompleto
                 if (txtBusquedaEmp.Text != string.Empty)
                 {
                     var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
-                    lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
-                    dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos(Convert.ToInt32(txtBusquedaEmp.Text));
+                    if (empleado.Count != 0)
+                    {
+                        lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
+                        dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos(Convert.ToInt32(txtBusquedaEmp.Text));
+                    }
+                    else 
+                    {
+                        MessageBox.Show("No se encontro empleado.");
+                        txtBusquedaEmp.Clear();
+                        lblNombreCompleto.Content = "";
+                        dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();
+                    }
                 }
                 else 
                 {
@@ -291,11 +372,14 @@ namespace abcCompleto
                 frmBusqueda x = new frmBusqueda();
                 x.ShowDialog();
                 txtBusquedaEmp.Text = x.sNumEmpleado;
-                var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
-                lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
-                txtBusquedaEmp_KeyDown(sender, new KeyEventArgs(Keyboard.PrimaryDevice,
-                                                   Keyboard.PrimaryDevice.ActiveSource,
-                                                   0, Key.Enter));
+                if (txtBusquedaEmp.Text != string.Empty)
+                {
+                    var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
+                    lblNombreCompleto.Content = empleado[0].nombre + " " + empleado[0].primerap + " " + empleado[0].segundoap;
+                    txtBusquedaEmp_KeyDown(sender, new KeyEventArgs(Keyboard.PrimaryDevice,
+                                                       Keyboard.PrimaryDevice.ActiveSource,
+                                                       0, Key.Enter));
+                }
             }
         }
 

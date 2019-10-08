@@ -40,7 +40,6 @@ create table SalarioABC
     REFERENCES EmpleadoABC (idNumEmpleado)
 );
 
-alter table SalarioABC ALTER COLUMN salario_mensual float ;
 create table MovimientosABC
 (
 	idmovimiento int IDENTITY(1,1) primary key,
@@ -60,8 +59,6 @@ insert into RolABC (desc_rol) values ('Auxiliar');
 insert into TipoABC (desc_tipo) values ('Interno');
 insert into TipoABC (desc_tipo) values ('Externo');
 
-delete from SalarioABC where idmovimiento = 1
-
 select * from RolABC
 select * from TipoABC
 select * from EmpleadoABC
@@ -70,13 +67,8 @@ select * from SalarioABC
 
 insert into SalarioABC (idNumEmpleado) values (97848972);
 
---drop table TipoABC;
---drop table RolABC;
---drop table EmpleadoABC;
---drop table SalarioABC;
---drop table MovimientosABC;
-
-
-select b.salario_mensual FROM EmpleadoABC a join SalarioABC b ON a.idNumEmpleado = b.idsalario
-
-{"Conflicting changes detected. This may happen when trying to insert multiple entities with the same key."}
+drop table TipoABC;
+drop table RolABC;
+drop table EmpleadoABC;
+drop table SalarioABC;
+drop table MovimientosABC;

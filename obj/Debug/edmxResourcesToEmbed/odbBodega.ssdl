@@ -15,6 +15,17 @@
     <Property Name="idtipo" Type="int" Nullable="false" />
     <Property Name="img_usuario" Type="image" />
   </EntityType>
+  <EntityType Name="HorariosABC">
+    <Key>
+      <PropertyRef Name="idhorario" />
+    </Key>
+    <Property Name="idhorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnumempleado" Type="int" Nullable="false" />
+    <Property Name="cubrio_turno" Type="int" Nullable="false" />
+    <Property Name="idrol" Type="int" Nullable="false" />
+    <Property Name="idtipo" Type="int" Nullable="false" />
+    <Property Name="fecha_movimiento" Type="datetime" />
+  </EntityType>
   <EntityType Name="MovimientosABC">
     <Key>
       <PropertyRef Name="idmovimiento" />
@@ -73,6 +84,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HorariosABC_EmpleadoABC">
+    <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
+    <End Role="HorariosABC" Type="Self.HorariosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoABC">
+        <PropertyRef Name="idNumEmpleado" />
+      </Principal>
+      <Dependent Role="HorariosABC">
+        <PropertyRef Name="idnumempleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_MovimientosABC_EmpleadoABC">
     <End Role="EmpleadoABC" Type="Self.EmpleadoABC" Multiplicity="1" />
     <End Role="MovimientosABC" Type="Self.MovimientosABC" Multiplicity="*" />
@@ -99,6 +122,7 @@
   </Association>
   <EntityContainer Name="RopaModelStoreContainer">
     <EntitySet Name="EmpleadoABC" EntityType="Self.EmpleadoABC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HorariosABC" EntityType="Self.HorariosABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MovimientosABC" EntityType="Self.MovimientosABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolABC" EntityType="Self.RolABC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalarioABC" EntityType="Self.SalarioABC" Schema="dbo" store:Type="Tables" />
@@ -110,6 +134,10 @@
     <AssociationSet Name="FK_EmpleadosABC_TipoABC" Association="Self.FK_EmpleadosABC_TipoABC">
       <End Role="TipoABC" EntitySet="TipoABC" />
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorariosABC_EmpleadoABC" Association="Self.FK_HorariosABC_EmpleadoABC">
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+      <End Role="HorariosABC" EntitySet="HorariosABC" />
     </AssociationSet>
     <AssociationSet Name="FK_MovimientosABC_EmpleadoABC" Association="Self.FK_MovimientosABC_EmpleadoABC">
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />

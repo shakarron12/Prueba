@@ -30,6 +30,11 @@
       <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
       <End Role="SalarioABC" EntitySet="SalarioABC" />
     </AssociationSet>
+    <EntitySet Name="HorariosABC" EntityType="RopaModel.HorariosABC" />
+    <AssociationSet Name="FK_HorariosABC_EmpleadoABC" Association="RopaModel.FK_HorariosABC_EmpleadoABC">
+      <End Role="EmpleadoABC" EntitySet="EmpleadoABC" />
+      <End Role="HorariosABC" EntitySet="HorariosABC" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="MovimientosABC">
     <Key>
@@ -70,6 +75,7 @@
     <NavigationProperty Name="TipoABC" Relationship="RopaModel.FK_EmpleadosABC_TipoABC" FromRole="EmpleadoABC" ToRole="TipoABC" />
     <NavigationProperty Name="MovimientosABC" Relationship="RopaModel.FK_MovimientosABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="MovimientosABC" />
     <NavigationProperty Name="SalarioABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="SalarioABC" />
+    <NavigationProperty Name="HorariosABC" Relationship="RopaModel.FK_HorariosABC_EmpleadoABC" FromRole="EmpleadoABC" ToRole="HorariosABC" />
   </EntityType>
   <Association Name="FK_EmpleadosABC_RolABC">
     <End Type="RopaModel.RolABC" Role="RolABC" Multiplicity="1" />
@@ -125,6 +131,30 @@
       </Principal>
       <Dependent Role="SalarioABC">
         <PropertyRef Name="idNumEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HorariosABC">
+    <Key>
+      <PropertyRef Name="idhorario" />
+    </Key>
+    <Property Name="idhorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idnumempleado" Type="Int32" Nullable="false" />
+    <Property Name="cubrio_turno" Type="Int32" Nullable="false" />
+    <Property Name="idrol" Type="Int32" Nullable="false" />
+    <Property Name="idtipo" Type="Int32" Nullable="false" />
+    <Property Name="fecha_movimiento" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_HorariosABC_EmpleadoABC" FromRole="HorariosABC" ToRole="EmpleadoABC" />
+  </EntityType>
+  <Association Name="FK_HorariosABC_EmpleadoABC">
+    <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
+    <End Type="RopaModel.HorariosABC" Role="HorariosABC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoABC">
+        <PropertyRef Name="idNumEmpleado" />
+      </Principal>
+      <Dependent Role="HorariosABC">
+        <PropertyRef Name="idnumempleado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

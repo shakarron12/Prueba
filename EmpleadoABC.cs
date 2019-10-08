@@ -18,6 +18,7 @@ namespace abcCompleto
         {
             this.MovimientosABC = new HashSet<MovimientosABC>();
             this.SalarioABC = new HashSet<SalarioABC>();
+            this.HorariosABC = new HashSet<HorariosABC>();
         }
     
         public int idNumEmpleado { get; set; }
@@ -35,5 +36,6 @@ namespace abcCompleto
         public virtual TipoABC TipoABC { get; set; }
         public virtual ICollection<MovimientosABC> MovimientosABC { get; set; }
         public virtual ICollection<SalarioABC> SalarioABC { get; set; }
+        public virtual ICollection<HorariosABC> HorariosABC { get; set; }
     }
 }

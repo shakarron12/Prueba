@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace abcCompleto
 {
-    class clsCalculoMovimiento : clsEmpleado
-    {
+     class clsCalculoMovimiento : clsEmpleado
+     {
         private Int32 iNumEmpleado;
         private double iSueldoNto;
         private int iSueldoBrto;
@@ -58,7 +59,7 @@ namespace abcCompleto
 
         internal List<clsCalculoMovimiento> traerDatos() 
         {
-            List<SalarioABC> salarios = BuscarSalariosTotalesRN();
+            List<SalarioABC> salarios = BuscarSalarios();
             List<clsCalculoMovimiento> movimientos = new List<clsCalculoMovimiento>();
             foreach (SalarioABC salario in salarios)
             {
@@ -96,6 +97,11 @@ namespace abcCompleto
             }
 
             return movimientos;
+        }
+
+        internal void CalcularTotalBono() 
+        {
+            
         }
 
     }

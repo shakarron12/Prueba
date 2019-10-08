@@ -19,23 +19,22 @@ namespace abcCompleto
             odb = new odbBodegaPrueba();
         }
 
-        //EMPLEADOS
-        protected bool EliminarEmpleadoRN(int sNumEmpleado)
+        protected bool VerificarConexionRN()
         {
-            bool bRegresa = false;
-            try
-            {
-                var resultado = (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).Single();
+            bool bConected = false;
 
-                odb.EmpleadoABC.Remove(resultado);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
+            if (odb.Database.Exists())
             {
-                MessageBox.Show(ex.Message);
+                bConected = true;
             }
-            return bRegresa;
+            return bConected;
+        }
+        //EMPLEADOS
+        protected void EliminarEmpleadoRN(int sNumEmpleado)
+        {
+            var resultado = (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).Single();
+            odb.EmpleadoABC.Remove(resultado);
+            odb.SaveChanges();
         }
 
         protected List<abcCompleto.EmpleadoABC> BuscarEmpleadoRN(int sNumEmpleado)
@@ -43,53 +42,31 @@ namespace abcCompleto
             return (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).ToList();
         }
 
-        internal List<clsBusqueda> BuscarEmpleadoLikeRN(string sNombreUser)
+        protected List<clsBusqueda> BuscarEmpleadoLikeRN(string sNombreUser)
         {
             return (from a in odb.EmpleadoABC where a.nombre.ToString().Contains(sNombreUser) || a.primerap.ToString().Contains(sNombreUser) || a.segundoap.ToString().Contains(sNombreUser) 
                     select new clsBusqueda { _IdNumEmpleado = a.idNumEmpleado, _SNombreCompleto = (a.nombre + " " + a.primerap + " " + a.segundoap) }).ToList();
         }
 
-        protected bool GuardarEmpleadoRN(EmpleadoABC empleado)
+        protected void GuardarEmpleadoRN(EmpleadoABC empleado)
         {
-            bool bRegresa = false;
-            try
-            {
-                odb.EmpleadoABC.Add(empleado);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            odb.EmpleadoABC.Add(empleado);
+            odb.SaveChanges();
         }
 
-        protected bool ActualizarEmpleadoRN(EmpleadoABC empleado)
+        protected void ActualizarEmpleadoRN(EmpleadoABC empleado)
         {
-            bool bRegresa = false;
-            try
-            {
-                var empleado_finded = odb.EmpleadoABC.Find(empleado.idNumEmpleado);
-                empleado_finded.nombre = empleado.nombre;
-                empleado_finded.primerap = empleado.primerap;
-                empleado_finded.segundoap = empleado.segundoap;
-                empleado_finded.direccion = empleado.direccion;
-                empleado_finded.curp = empleado.curp;
-                empleado_finded.fechanac = empleado.fechanac;
-                empleado_finded.idrol = empleado.idrol;
-                empleado_finded.idtipo = empleado.idtipo;
-                empleado_finded.img_usuario = empleado.img_usuario;
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            var empleado_finded = odb.EmpleadoABC.Find(empleado.idNumEmpleado);
+            empleado_finded.nombre = empleado.nombre;
+            empleado_finded.primerap = empleado.primerap;
+            empleado_finded.segundoap = empleado.segundoap;
+            empleado_finded.direccion = empleado.direccion;
+            empleado_finded.curp = empleado.curp;
+            empleado_finded.fechanac = empleado.fechanac;
+            empleado_finded.idrol = empleado.idrol;
+            empleado_finded.idtipo = empleado.idtipo;
+            empleado_finded.img_usuario = empleado.img_usuario;
+            odb.SaveChanges();
         }
 
         protected List<string> llenarComboRolRN()
@@ -104,7 +81,7 @@ namespace abcCompleto
 
         protected int RetornaridRolRN(string idRol)
         {
-            return (int)(from a in odb.RolABC where a.desc_rol == (idRol) select a.idrol).ToList()[0];
+            return (int)(from a in odb.RolABC where a.desc_rol == (idRol) select a.idrol).ToList()[0];;
         }
 
         protected int RetornaridTipoRN(string idTipo)
@@ -113,160 +90,85 @@ namespace abcCompleto
         }
 
         //MOVIMIENTOS
-        protected bool GuardarMovimientoRN(MovimientosABC movimiento)
+        protected void GuardarMovimientoRN(MovimientosABC movimiento)
         {
-            bool bRegresa = false;
-            try
-            {
-                odb.MovimientosABC.Add(movimiento);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            odb.MovimientosABC.Add(movimiento);
+            odb.SaveChanges();
         }
 
-        protected bool EliminarMovimientoRN(int idMovimiento)
+        protected void EliminarMovimientoRN(int idMovimiento)
         {
-            bool bRegresa = false;
-            try
-            {
-                var resultado = (from a in odb.MovimientosABC where a.idmovimiento == idMovimiento select a).Single();
+            var resultado = (from a in odb.MovimientosABC where a.idmovimiento == idMovimiento select a).Single();
 
-                odb.MovimientosABC.Remove(resultado);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return bRegresa;
+            odb.MovimientosABC.Remove(resultado);
+            odb.SaveChanges();
         }
 
-        protected bool ActualizarMovimientoRN(MovimientosABC movimiento)
+        protected void ActualizarMovimientoRN(MovimientosABC movimiento)
         {
-            bool bRegresa = false;
-            try
-            {
-                var movimiento_finded = odb.MovimientosABC.Find(movimiento.idmovimiento);
-                movimiento_finded.cant_entregas = movimiento.cant_entregas;
-                movimiento_finded.idrol = movimiento.idrol;
-                movimiento_finded.idtipo = movimiento.idtipo;
-                movimiento_finded.fecha_movimiento = movimiento.fecha_movimiento;
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            var movimiento_finded = odb.MovimientosABC.Find(movimiento.idmovimiento);
+            movimiento_finded.cant_entregas = movimiento.cant_entregas;
+            movimiento_finded.idrol = movimiento.idrol;
+            movimiento_finded.idtipo = movimiento.idtipo;
+            movimiento_finded.fecha_movimiento = movimiento.fecha_movimiento;
+            odb.SaveChanges();
         }
 
-        internal List<clsBusquedaMovimiento> BuscarMovimientoLikeRN(int iNumEmpleado, DateTime dtFechaInicio, DateTime dtFechaFin)
+        protected List<clsBusquedaMovimiento> BuscarMovimientoLikeRN(int iNumEmpleado, DateTime dtFechaInicio, DateTime dtFechaFin)
         {
-            return
-                (from a in odb.MovimientosABC
-                 where a.fecha_movimiento >= dtFechaInicio
-                     && a.fecha_movimiento <= dtFechaFin
-                     && a.idnumempleado == iNumEmpleado
-                 select new clsBusquedaMovimiento { 
-                     _IdMovimiento = a.idmovimiento, 
-                     _INumEmpleado = a.idnumempleado, 
-                     _DtFecha = a.fecha_movimiento.ToString() 
-                 }).ToList();
-
+            return (from a in odb.MovimientosABC
+                    where a.fecha_movimiento >= dtFechaInicio
+                        && a.fecha_movimiento <= dtFechaFin
+                        && a.idnumempleado == iNumEmpleado
+                    select new clsBusquedaMovimiento
+                    {
+                        _IdMovimiento = a.idmovimiento,
+                        _INumEmpleado = a.idnumempleado,
+                        _DtFecha = a.fecha_movimiento.ToString()
+                    }).ToList();
         }
 
-        internal List<clsMovimiento> BuscarMovimientoRN(int iNumMovimiento)
+        protected List<clsMovimiento> BuscarMovimientoRN(int iNumMovimiento)
         {
-            return
-                (from a in odb.MovimientosABC
-                 where a.idmovimiento == iNumMovimiento
-                 select new clsMovimiento
-                 {
-                     _ICantidad = a.cant_entregas.Value,
-                     _IRol = a.idrol,
-                     _ITipo = a.idtipo,
-                     _DtFecha = a.fecha_movimiento.ToString()
-                 }).ToList();
-
+            return (from a in odb.MovimientosABC
+                    where a.idmovimiento == iNumMovimiento
+                    select new clsMovimiento
+                    {
+                        _ICantidad = a.cant_entregas.Value,
+                        _IRol = a.idrol,
+                        _ITipo = a.idtipo,
+                        _DtFecha = a.fecha_movimiento.ToString()
+                    }).ToList();
         }
 
-        protected ArrayList RetornarValesRN(int iNumEmpleado)
+        protected List<MovimientosABC> RetornarValesRN(int iNumEmpleado)
         {
-            ArrayList valestotales = new ArrayList();
-            List<MovimientosABC> valesTotalesEmpleado = (from a in odb.MovimientosABC
-                                                         where a.idnumempleado == iNumEmpleado
-                                                         select a).ToList();
-
-            foreach (MovimientosABC movimiento in valesTotalesEmpleado)
-            {
-                valestotales.Add((int)movimiento.cant_entregas);
-            }
-            return valestotales;
+            return (from a in odb.MovimientosABC
+                    where a.idnumempleado == iNumEmpleado
+                    select a).ToList();
         }
 
         //SALARIOS
-        protected bool GuardarSalarioRN(SalarioABC salario)
+        protected void GuardarSalarioRN(SalarioABC salario)
         {
-            bool bRegresa = false;
-            try
-            {
-                odb.SalarioABC.Add(salario);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            odb.SalarioABC.Add(salario);
+            odb.SaveChanges();
         }
 
-        protected bool EliminarSalarioRN(int idEmpleado)
+        protected void EliminarSalarioRN(int idEmpleado)
         {
-            bool bRegresa = false;
-            try
-            {
-                var resultado = (from a in odb.SalarioABC where a.idNumEmpleado == idEmpleado select a).Single();
-
-                odb.SalarioABC.Remove(resultado);
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return bRegresa;
+            var resultado = (from a in odb.SalarioABC where a.idNumEmpleado == idEmpleado select a).Single();
+            odb.SalarioABC.Remove(resultado);
+            odb.SaveChanges();
         }
 
-        protected bool ActualizarSalarioRN(SalarioABC salario)
+        protected void ActualizarSalarioRN(SalarioABC salario)
         {
-            bool bRegresa = false;
-            try
-            {
-                var salario_finded = (from a in odb.SalarioABC
-                             where a.idNumEmpleado == salario.idNumEmpleado
-                             select a).FirstOrDefault();
-                salario_finded.salario_mensual = salario.salario_mensual;
-                odb.SaveChanges();
-                bRegresa = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return bRegresa;
+            var salario_finded = (from a in odb.SalarioABC
+                                  where a.idNumEmpleado == salario.idNumEmpleado
+                                  select a).FirstOrDefault();
+            salario_finded.salario_mensual = salario.salario_mensual;
+            odb.SaveChanges();
         }
 
         protected List<abcCompleto.SalarioABC> BuscarSalarioRN(int iNumEmpleado)

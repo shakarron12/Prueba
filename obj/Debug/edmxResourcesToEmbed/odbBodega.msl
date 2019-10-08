@@ -55,5 +55,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HorariosABC">
+      <EntityTypeMapping TypeName="RopaModel.HorariosABC">
+        <MappingFragment StoreEntitySet="HorariosABC">
+          <ScalarProperty Name="fecha_movimiento" ColumnName="fecha_movimiento" />
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="cubrio_turno" ColumnName="cubrio_turno" />
+          <ScalarProperty Name="idnumempleado" ColumnName="idnumempleado" />
+          <ScalarProperty Name="idhorario" ColumnName="idhorario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

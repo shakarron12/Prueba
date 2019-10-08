@@ -10,13 +10,14 @@
 namespace abcCompleto
 {
     using System;
+    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class odbBodegaPrueba : DbContext
     {
         public odbBodegaPrueba()
-            : base("name=odbBodegaPrueba")
+            : base("metadata=res://*/odbBodega.csdl|res://*/odbBodega.ssdl|res://*/odbBodega.msl;provider=System.Data.SqlClient;provider connection string=\"data source=" + Conexion.sIp + ";initial catalog=" + Conexion.sDB + ";user id=" + Conexion.sUsuario + ";password=" + Conexion.sContraseña + ";multipleactiveresultsets=True;application name=EntityFramework\"")
         {
         }
     
@@ -24,11 +25,21 @@ namespace abcCompleto
         {
             throw new UnintentionalCodeFirstException();
         }
+
+        public static string GetConnectionString(string dbName)
+        {
+            // Server=localhost;Database={0};Uid=username;Pwd=password
+            var connString =
+                ConfigurationManager.ConnectionStrings[dbName].ConnectionString.ToString();
+
+            return String.Format(connString, dbName);
+        }
     
         public virtual DbSet<TipoABC> TipoABC { get; set; }
         public virtual DbSet<MovimientosABC> MovimientosABC { get; set; }
         public virtual DbSet<RolABC> RolABC { get; set; }
         public virtual DbSet<EmpleadoABC> EmpleadoABC { get; set; }
         public virtual DbSet<SalarioABC> SalarioABC { get; set; }
+        public virtual DbSet<HorariosABC> HorariosABC { get; set; }
     }
 }

@@ -19,6 +19,11 @@ namespace abcCompleto
         
         }
 
+        internal bool VerificarConexion() 
+        {
+            return VerificarConexionPrin();
+        }
+
         internal byte[] BitMapImageToArray(BitmapImage image)
         {
             byte[] data;

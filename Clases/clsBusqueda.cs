@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace abcCompleto
 {
-    class clsBusqueda : clsEmpleado
+    public class clsBusqueda : clsEmpleado
     {
 
         private int idNumEmpleado;

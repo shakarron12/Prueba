@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace abcCompleto
 {
-    class clsMovimiento : clsEmpleado
+    public class clsMovimiento : clsEmpleado
     {
         private int iCantidad;
         private int iRol;
