@@ -14,7 +14,7 @@
         <AssociationConnector Association="RopaModel.FK_MovimientosABC_EmpleadoABC" />
         <EntityTypeShape EntityType="RopaModel.SalarioABC" Width="1.5" PointX="5.375" PointY="5.75" />
         <AssociationConnector Association="RopaModel.FK_SalarioABC_EmpleadoABC" />
-        <EntityTypeShape EntityType="RopaModel.HorariosABC" Width="1.5" PointX="3.125" PointY="7.5" />
+        <EntityTypeShape EntityType="RopaModel.HorariosABC" Width="1.5" PointX="3.5" PointY="7.875" />
         <AssociationConnector Association="RopaModel.FK_HorariosABC_EmpleadoABC" />
         </Diagram>
     </edmx:Diagrams>

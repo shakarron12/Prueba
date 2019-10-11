@@ -10,7 +10,6 @@
 namespace abcCompleto
 {
     using System;
-    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
@@ -24,15 +23,6 @@ namespace abcCompleto
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
-        }
-
-        public static string GetConnectionString(string dbName)
-        {
-            // Server=localhost;Database={0};Uid=username;Pwd=password
-            var connString =
-                ConfigurationManager.ConnectionStrings[dbName].ConnectionString.ToString();
-
-            return String.Format(connString, dbName);
         }
     
         public virtual DbSet<TipoABC> TipoABC { get; set; }

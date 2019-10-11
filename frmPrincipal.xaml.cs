@@ -307,6 +307,7 @@ namespace abcCompleto
         private void chkSalario_Checked(object sender, RoutedEventArgs e)
         {
             txtSalario.IsEnabled = true;
+            txtSalario.Text = "7200.00";
             var salario = objControlador.BuscarSalario(Convert.ToInt32(txtNoEmpleado.Text));
 
             if (salario.Count > 0)
@@ -335,6 +336,7 @@ namespace abcCompleto
 
         private void tiMovimientos_GotFocus(object sender, RoutedEventArgs e)
         {
+            dtgCalcMovimientos.ItemsSource = null;
             txtBusquedaEmp.Text = txtNoEmpleado.Text;
             lblNombreCompleto.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;
             dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();

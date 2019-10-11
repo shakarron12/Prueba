@@ -79,6 +79,7 @@ namespace abcCompleto
         private void chkCubrioTurno_Checked(object sender, RoutedEventArgs e)
         {
             cbRol.IsEnabled = true;
+            //aqui vamos a hacer la magia
         }
 
         private void chkCubrioTurno_Unchecked(object sender, RoutedEventArgs e)
@@ -100,7 +101,7 @@ namespace abcCompleto
                 {
                     MovimientosABC movimiento = new MovimientosABC()
                     {
-                        idnumempleado = iNumEmpleado,
+                        idnumempleado = iNumEmpleado, 
                         cant_entregas = Convert.ToInt32(txtCantidad.Text),
                         idrol = objControlador.RetornarIdRol(cbRol.SelectedValue.ToString()),
                         idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString()),

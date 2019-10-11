@@ -52,6 +52,17 @@ create table MovimientosABC
     REFERENCES EmpleadoABC (idnumempleado)
 );
 
+create table HorariosABC
+(
+	idhorario int IDENTITY(1,1) primary key,
+	idnumempleado integer not null,
+	idrol int not null,
+	idtipo int not null,
+	fecha_movimiento datetime,
+	CONSTRAINT FK_HorariosABC_EmpleadoABC FOREIGN KEY (idnumempleado)     
+    REFERENCES EmpleadoABC (idnumempleado)
+);
+
 insert into RolABC (desc_rol,bono) values ('Chofer', 10.00);
 insert into RolABC (desc_rol,bono) values ('Cargador',5.00);
 insert into RolABC (desc_rol) values ('Auxiliar');
@@ -64,7 +75,11 @@ select * from TipoABC
 select * from EmpleadoABC
 select * from MovimientosABC
 select * from SalarioABC
+select * from HorariosABC
 
+update SalarioABC set salario_mensual = 1500 where idNumEmpleado = 97899459
+
+insert into HorariosABC(idnumempleado, idrol, idtipo, fecha_movimiento) values (97848972, 1,1,GETDATE())
 insert into SalarioABC (idNumEmpleado) values (97848972);
 
 drop table TipoABC;

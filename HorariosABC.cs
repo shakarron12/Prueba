@@ -16,7 +16,6 @@ namespace abcCompleto
     {
         public int idhorario { get; set; }
         public int idnumempleado { get; set; }
-        public int cubrio_turno { get; set; }
         public int idrol { get; set; }
         public int idtipo { get; set; }
         public Nullable<System.DateTime> fecha_movimiento { get; set; }

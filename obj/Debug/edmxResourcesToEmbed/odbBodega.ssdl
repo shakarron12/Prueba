@@ -21,7 +21,6 @@
     </Key>
     <Property Name="idhorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idnumempleado" Type="int" Nullable="false" />
-    <Property Name="cubrio_turno" Type="int" Nullable="false" />
     <Property Name="idrol" Type="int" Nullable="false" />
     <Property Name="idtipo" Type="int" Nullable="false" />
     <Property Name="fecha_movimiento" Type="datetime" />

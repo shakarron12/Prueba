@@ -61,7 +61,6 @@
           <ScalarProperty Name="fecha_movimiento" ColumnName="fecha_movimiento" />
           <ScalarProperty Name="idtipo" ColumnName="idtipo" />
           <ScalarProperty Name="idrol" ColumnName="idrol" />
-          <ScalarProperty Name="cubrio_turno" ColumnName="cubrio_turno" />
           <ScalarProperty Name="idnumempleado" ColumnName="idnumempleado" />
           <ScalarProperty Name="idhorario" ColumnName="idhorario" />
         </MappingFragment>

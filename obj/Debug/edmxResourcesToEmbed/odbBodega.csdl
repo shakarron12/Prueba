@@ -140,7 +140,6 @@
     </Key>
     <Property Name="idhorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idnumempleado" Type="Int32" Nullable="false" />
-    <Property Name="cubrio_turno" Type="Int32" Nullable="false" />
     <Property Name="idrol" Type="Int32" Nullable="false" />
     <Property Name="idtipo" Type="Int32" Nullable="false" />
     <Property Name="fecha_movimiento" Type="DateTime" Precision="3" />

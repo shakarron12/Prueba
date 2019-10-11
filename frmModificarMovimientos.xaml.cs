@@ -24,12 +24,7 @@ namespace abcCompleto
         clsMovimiento objControlador = new clsMovimiento();
         private int iNumEmpleado;
         private bool bEsc;
-
-        public bool _BEsc
-        {
-            get { return bEsc; }
-            set { bEsc = value; }
-        }
+        private bool bExiste;
 
         public int _INumEmpleado
         {
@@ -41,7 +36,7 @@ namespace abcCompleto
         {
             InitializeComponent();
             _INumEmpleado = iNumEmpleado;
-
+            bExiste = true;
             cbRol.ItemsSource = objControlador.RetornarRoles();
             cbTipo.ItemsSource = objControlador.RetornarTipos();
             txtMovimiento.Focus();
@@ -118,7 +113,7 @@ namespace abcCompleto
                 txtMovimiento.IsEnabled = false;
                 if (movimiento.Count > 0)
                 {
-                    
+                    bExiste = true;
                     foreach (var datos in movimiento)
                     {
                         txtCantidad.Text = datos._ICantidad.ToString();
@@ -131,6 +126,7 @@ namespace abcCompleto
                 }
                 else
                 {
+                    bExiste = false;
                     txtMovimiento.IsEnabled = true;
                     txtMovimiento.Focus();
                 }
@@ -152,10 +148,11 @@ namespace abcCompleto
 
         private void txtMovimiento_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if (txtMovimiento.Text == string.Empty && !bEsc)
+            if (bExiste == false && !bEsc)
             {
                 MessageBox.Show("Ingrese un id valido.", "Error", MessageBoxButton.OK);
                 e.Handled = true;
+                bExiste = true;
             }
         }
 

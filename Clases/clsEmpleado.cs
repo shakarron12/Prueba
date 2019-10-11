@@ -23,7 +23,7 @@ namespace abcCompleto
         {
             return VerificarConexionRN();
         }
-
+        
         internal bool ValidarControlesVacios(UIElementCollection uiControles)
         {
             bool bRegresa = true;
@@ -323,7 +323,7 @@ namespace abcCompleto
         internal List<SalarioABC> BuscarSalarios()
         {
             List<abcCompleto.SalarioABC> salarios = new List<SalarioABC>();
-
+            salarios.Clear();
             try
             {
                 salarios = BuscarSalariosTotalesRN();
@@ -380,5 +380,53 @@ namespace abcCompleto
             }
             return bRegresa;
         }
+
+        //HORARIOS
+        internal List<HorariosABC> BuscarHorarios(int iNumEmpleado)
+        {
+            List<HorariosABC> horarios = new List<HorariosABC>();
+
+            try
+            {
+                horarios = BuscarHorariosRN(iNumEmpleado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return horarios;
+        }
+
+        internal bool GuardarHorario(HorariosABC horario)
+        {
+            bool bRegresa = false;
+            try
+            {
+                GuardarHorarioRN(horario);
+                bRegresa = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return bRegresa;
+        }
+
+        internal int RetornarBonoRol(int idRol)
+        {
+            int iBono = 0;
+            try
+            {
+                iBono = RetornarBonoRolRN(idRol);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return iBono;
+        }
+        
     }
 }

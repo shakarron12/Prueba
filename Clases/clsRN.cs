@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,14 @@ namespace abcCompleto
         public clsRN() 
         {
             odb = new odbBodegaPrueba();
+        }
+
+        protected void RefrescarEntidades() 
+        {
+            foreach (var entity in odb.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
         }
 
         protected bool VerificarConexionRN()
@@ -89,6 +98,11 @@ namespace abcCompleto
             return (int)(from a in odb.TipoABC where a.desc_tipo == (idTipo) select a.idtipo).ToList()[0];
         }
 
+        protected int RetornarBonoRolRN(int idRol) 
+        {
+            return (int)(from a in odb.RolABC where a.idrol == (idRol) select a.bono).ToList()[0];;
+        }
+
         //MOVIMIENTOS
         protected void GuardarMovimientoRN(MovimientosABC movimiento)
         {
@@ -116,6 +130,7 @@ namespace abcCompleto
 
         protected List<clsBusquedaMovimiento> BuscarMovimientoLikeRN(int iNumEmpleado, DateTime dtFechaInicio, DateTime dtFechaFin)
         {
+            RefrescarEntidades();
             return (from a in odb.MovimientosABC
                     where a.fecha_movimiento >= dtFechaInicio
                         && a.fecha_movimiento <= dtFechaFin
@@ -130,6 +145,7 @@ namespace abcCompleto
 
         protected List<clsMovimiento> BuscarMovimientoRN(int iNumMovimiento)
         {
+            RefrescarEntidades();
             return (from a in odb.MovimientosABC
                     where a.idmovimiento == iNumMovimiento
                     select new clsMovimiento
@@ -143,6 +159,7 @@ namespace abcCompleto
 
         protected List<MovimientosABC> RetornarValesRN(int iNumEmpleado)
         {
+            RefrescarEntidades();
             return (from a in odb.MovimientosABC
                     where a.idnumempleado == iNumEmpleado
                     select a).ToList();
@@ -169,16 +186,36 @@ namespace abcCompleto
                                   select a).FirstOrDefault();
             salario_finded.salario_mensual = salario.salario_mensual;
             odb.SaveChanges();
+            salario_finded = (from a in odb.SalarioABC
+                              where a.idNumEmpleado == salario.idNumEmpleado
+                              select a).FirstOrDefault();
         }
 
         protected List<abcCompleto.SalarioABC> BuscarSalarioRN(int iNumEmpleado)
         {
+            RefrescarEntidades();            
             return (from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).ToList();
-        }
 
+        }
+       
         protected List<abcCompleto.SalarioABC> BuscarSalariosTotalesRN()
         {
+            RefrescarEntidades();
             return (from a in odb.SalarioABC select a).ToList();
+        }
+
+        //HORARIOS
+        protected List<HorariosABC> BuscarHorariosRN(int iNumEmpleado) 
+        {
+            return (from a in odb.HorariosABC
+                    where a.idnumempleado == iNumEmpleado && a.idtipo != 2
+                    select a).ToList();
+        }
+
+        protected void GuardarHorarioRN(HorariosABC horario)
+        {
+            odb.HorariosABC.Add(horario);
+            odb.SaveChanges();
         }
     }
 }

@@ -26,7 +26,6 @@
           </Key>
           <Property Name="idhorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idnumempleado" Type="int" Nullable="false" />
-          <Property Name="cubrio_turno" Type="int" Nullable="false" />
           <Property Name="idrol" Type="int" Nullable="false" />
           <Property Name="idtipo" Type="int" Nullable="false" />
           <Property Name="fecha_movimiento" Type="datetime" />
@@ -297,7 +296,6 @@
           </Key>
           <Property Name="idhorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idnumempleado" Type="Int32" Nullable="false" />
-          <Property Name="cubrio_turno" Type="Int32" Nullable="false" />
           <Property Name="idrol" Type="Int32" Nullable="false" />
           <Property Name="idtipo" Type="Int32" Nullable="false" />
           <Property Name="fecha_movimiento" Type="DateTime" Precision="3" />
@@ -381,7 +379,6 @@
                 <ScalarProperty Name="fecha_movimiento" ColumnName="fecha_movimiento" />
                 <ScalarProperty Name="idtipo" ColumnName="idtipo" />
                 <ScalarProperty Name="idrol" ColumnName="idrol" />
-                <ScalarProperty Name="cubrio_turno" ColumnName="cubrio_turno" />
                 <ScalarProperty Name="idnumempleado" ColumnName="idnumempleado" />
                 <ScalarProperty Name="idhorario" ColumnName="idhorario" />
               </MappingFragment>

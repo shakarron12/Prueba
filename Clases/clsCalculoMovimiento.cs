@@ -10,8 +10,8 @@ namespace abcCompleto
      class clsCalculoMovimiento : clsEmpleado
      {
         private Int32 iNumEmpleado;
-        private double iSueldoNto;
-        private int iSueldoBrto;
+        private string sSueldoNto;
+        private string sSueldoBrto;
         private int iVales;
         private double dIsr;
         private int iBono;
@@ -34,16 +34,16 @@ namespace abcCompleto
             set { iVales = value; }
         }
         
-        public int _SueldoBrto
+        public string _SueldoBrto
         {
-            get { return iSueldoBrto; }
-            set { iSueldoBrto = value; }
+            get { return sSueldoBrto; }
+            set { sSueldoBrto = value; }
         }
-    
-        public double _SueldoNto
+
+        public string _SueldoNto
         {
-            get { return iSueldoNto; }
-            set { iSueldoNto = value; }
+            get { return sSueldoNto; }
+            set { sSueldoNto = value; }
         }
 
         public int _IBono
@@ -64,13 +64,14 @@ namespace abcCompleto
             foreach (SalarioABC salario in salarios)
             {
                 int valesEmpleado = retornarVales((int)salario.idNumEmpleado);
+                float fTotalBonos = CalcularTotalBono((int)salario.idNumEmpleado);
                 clsCalculoMovimiento movimiento = new clsCalculoMovimiento
                 {
                     _NumEmpleado = (int)salario.idNumEmpleado,
                     _Isr = salario.salario_mensual >= 16000 ? 0.12 : 0.09,
                     _Vales = valesEmpleado,
-                    _SueldoBrto = (int)salario.salario_mensual,
-                    _SueldoNto = ((int)salario.salario_mensual + (valesEmpleado * 5)) - (((int)salario.salario_mensual) * (salario.salario_mensual >= 16000 ? 0.12 : 0.09))
+                    _SueldoBrto = ((int)salario.salario_mensual).ToString("$#,###.###"),
+                    _SueldoNto = (((int)salario.salario_mensual + (valesEmpleado * 5)) - (((int)salario.salario_mensual) * (salario.salario_mensual >= 16000 ? 0.12 : 0.09)) + fTotalBonos).ToString("$#,###.###")
                 };
                 movimientos.Add(movimiento);
             }
@@ -85,22 +86,45 @@ namespace abcCompleto
             foreach (SalarioABC salario in salarios)
             {
                 int valesEmpleado = retornarVales((int)salario.idNumEmpleado);
+                float fTotalBonos = CalcularTotalBono(iNumEmpleado);
                 clsCalculoMovimiento movimiento = new clsCalculoMovimiento
                 {
                     _NumEmpleado = (int)salario.idNumEmpleado,
                     _Isr = salario.salario_mensual >= 16000 ? 0.12 : 0.09,
                     _Vales = valesEmpleado,
-                    _SueldoBrto = (int)salario.salario_mensual,
-                    _SueldoNto = ((int)salario.salario_mensual + (valesEmpleado * 5)) - (((int)salario.salario_mensual) * (salario.salario_mensual >= 16000 ? 0.12 : 0.09))
+                    _SueldoBrto = ((int)salario.salario_mensual).ToString("$#,###.###"),
+                    _SueldoNto = ((((int)salario.salario_mensual + (valesEmpleado * 5)) - (((int)salario.salario_mensual) * (salario.salario_mensual >= 16000 ? 0.12 : 0.09))) + fTotalBonos).ToString("$#,###.###")
                 };
                 movimientos.Add(movimiento);
             }
 
             return movimientos;
         }
-
-        internal void CalcularTotalBono() 
+         /*
+          * Metodo Double
+          Tenemos que consultar primero por empleado, Verificamos que sea interno para el bono
+          * si es interno sacamos el idRol, y los metemos a un arreglo.
+          * Una vez que tenemos visto los roles registrados, vamos a ir sumando en una variable
+          * fTotal += BonoDelRol;
+          * al final del foreach, vamos a tener la sumatoria total de los bonos.
+          * Los Auxiliares son los unicos que tendran en la pangalla de Movimientos un apartado
+          * para registrar que cubrieron turno.
+          */
+        internal float CalcularTotalBono(int iNumEmpleado) 
         {
+            List<HorariosABC> horariosEmpleado = BuscarHorarios(iNumEmpleado);
+            ArrayList alListaRoles = new ArrayList();
+            float fTotalBono = 0;
+            foreach (HorariosABC horario in horariosEmpleado)
+            {
+                alListaRoles.Add(horario.idrol);
+            }
+
+            foreach (int Rol in alListaRoles)
+            {
+                fTotalBono += RetornarBonoRol(Rol) * 8;
+            }
+            return fTotalBono;
             
         }
 
