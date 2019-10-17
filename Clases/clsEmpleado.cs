@@ -78,9 +78,9 @@ namespace abcCompleto
         }
 
         //EMPLEADOS
-        internal List<EmpleadoABC> BuscarEmpleado(int iNumEmpleado) 
+        internal abcCompleto.EmpleadoABC BuscarEmpleado(int iNumEmpleado) 
         {
-            List<abcCompleto.EmpleadoABC> empleado = new List<EmpleadoABC>();
+            EmpleadoABC empleado = new EmpleadoABC();
             try
             {
                 empleado = BuscarEmpleadoRN(iNumEmpleado);

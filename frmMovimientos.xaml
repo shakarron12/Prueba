@@ -17,7 +17,7 @@
         </TextBox>
         <DatePicker x:Name="dtFecha" HorizontalAlignment="Left" Height="25" Margin="161,88,0,0" VerticalAlignment="Top" Width="156" TabIndex="3"/>
         <TextBox x:Name="txtNumeroEmp" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" IsEnabled="False"/>
-        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="161,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="161,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2" IsEnabled="False"/>
         <Label Content="Cantidad de Entregas:" HorizontalAlignment="Left" Margin="9,127,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="chkCubrioTurno" Content="Cubrio Turno" HorizontalAlignment="Left" Margin="355,54,0,0" VerticalAlignment="Top" IsHitTestVisible="True" Visibility="Visible" Checked="chkCubrioTurno_Checked" Unchecked="chkCubrioTurno_Unchecked"/>
         <Border Margin="10,182,331,40" BorderBrush="DarkBlue" BorderThickness="1">

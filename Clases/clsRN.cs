@@ -46,9 +46,13 @@ namespace abcCompleto
             odb.SaveChanges();
         }
 
-        protected List<abcCompleto.EmpleadoABC> BuscarEmpleadoRN(int sNumEmpleado)
+        protected abcCompleto.EmpleadoABC BuscarEmpleadoRN(int sNumEmpleado)
         {
-            return (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).ToList();
+            EmpleadoABC empleadoRetornar = ((from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).ToList().Count) > 0
+                ? (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).ToList()[0]
+                : null;
+            return empleadoRetornar;
+            //return (from a in odb.EmpleadoABC where a.idNumEmpleado == sNumEmpleado select a).ToList()[0];
         }
 
         protected List<clsBusqueda> BuscarEmpleadoLikeRN(string sNombreUser)

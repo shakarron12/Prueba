@@ -8,7 +8,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TabControl x:Name="tcPantalla">
-            <TabItem Header="Empleados" Height="22" VerticalAlignment="Top" TabIndex="18">
+            <TabItem Header="Empleados" Height="22" VerticalAlignment="Top" TabIndex="18" GotFocus="TabItem_GotFocus">
                 <Grid Background="#FFE5E5E5" Name="GridControles2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="37*"/>
@@ -32,7 +32,7 @@
                                     <Image x:Name="imgUser" Stretch="Fill" Source="imagenes/user.ico" Margin="0,10,0,53"/>
                                 </Grid>
                             </Border>
-                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown" PreviewLostKeyboardFocus="txtNoEmpleado_PreviewLostKeyboardFocus"/>
+                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown" PreviewLostKeyboardFocus="txtNoEmpleado_PreviewLostKeyboardFocus" TextOptions.TextHintingMode="Fixed"/>
                             <Label x:Name="lblNoEmpleado" Content="No. Empleado" HorizontalAlignment="Left" Margin="26,15,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="130,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="20" MaxLines="1" TabIndex="2"/>
                             <Label x:Name="lblNoEmpleado_Copy" Content="Nombre:" HorizontalAlignment="Left" Margin="26,61,0,0" VerticalAlignment="Top"/>
@@ -88,7 +88,10 @@
             </TabItem>
             <TabItem x:Name="tiMovimientos" Header="Movimientos" GotFocus="tiMovimientos_GotFocus">
                 <Grid Background="#FFE5E5E5" Name="gridMovimientos">
-                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="txtBusquedaEmp_KeyDown"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="txtBusquedaEmp_KeyDown" Text="{Binding Text, ElementName=txtNoEmpleado}"/>
                     <DataGrid x:Name="dtgCalcMovimientos"   AutoGenerateColumns="False" IsTextSearchEnabled="False" HeadersVisibility="Column" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" GridLinesVisibility="None" IsReadOnly="True" IsManipulationEnabled="True" Margin="8,77,12,0" VerticalAlignment="Top" Height="423">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding _NumEmpleado}" Header="# Empleado" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>
@@ -101,6 +104,43 @@
                     <Label x:Name="lblBusqueda" Content="Num. Empleado:" HorizontalAlignment="Left" Margin="8,22,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblNumEmpleado" Content="Nombre Emp:" HorizontalAlignment="Left" Margin="398,22,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblNombreCompleto" Content="" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="290"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tiHorarios" Header="Horarios" IsEnabled="False" GotFocus="tiHorarios_GotFocus" Margin="-2,0" Height="22" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5" Name="gridHorarios">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtBusquedaEmp_Horarios" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Text, ElementName=txtNoEmpleado}" IsEnabled="False"/>
+                    <Label x:Name="lblNumEmpleado_Horario" Content="Num. Empleado:" HorizontalAlignment="Left" Margin="8,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblNomEmpleado_Horario" Content="Nombre Emp:" HorizontalAlignment="Left" Margin="398,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblNombreCompleto_Horario" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="290"/>
+                    <Border Margin="48,199,434,248" BorderBrush="DarkBlue" BorderThickness="1">
+                        <ComboBox x:Name="cbRol_Horario" HorizontalAlignment="Left" VerticalAlignment="Top" Width="156" Height="23" TabIndex="8" Margin="99,38,0,0" ItemsSource="{Binding Items, ElementName=cbRol}" IsEnabled="False">
+                            <ComboBox.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0.63"/>
+                                </LinearGradientBrush>
+                            </ComboBox.Background>
+                        </ComboBox>
+                    </Border>
+                    <Border Margin="436,199,46,248" BorderBrush="DarkBlue" BorderThickness="1">
+                        <ComboBox x:Name="cbTipo_Horario" HorizontalAlignment="Left" VerticalAlignment="Top" Width="156" Height="23" TabIndex="8" IsEnabled="False" Margin="101,39,0,0" ItemsSource="{Binding Items, ElementName=cbTipo}">
+                            <ComboBox.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0.63"/>
+                                </LinearGradientBrush>
+                            </ComboBox.Background>
+                        </ComboBox>
+                    </Border>
+                    <Label Content="Rol:" HorizontalAlignment="Left" Margin="86,235,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Tipo:" HorizontalAlignment="Left" Margin="472,235,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnChecar" Content="CHECAR ENTRADA" Margin="10,454,10,0" VerticalAlignment="Top" Height="77" Click="btnChecar_Click"/>
+                    <CheckBox x:Name="chkCubrioTurno" Content="Cubrio Turno" HorizontalAlignment="Left" Margin="15,94,0,0" VerticalAlignment="Top" IsHitTestVisible="True" Visibility="Visible" Checked="chkCubrioTurno_Checked" Unchecked="chkCubrioTurno_Unchecked"/>
                 </Grid>
             </TabItem>
         </TabControl>

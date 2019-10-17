@@ -133,6 +133,8 @@ namespace abcCompleto
             }
             else
             {
+                bExiste = false;
+                txtMovimiento.IsEnabled = true;
                 txtMovimiento.Focus();
             }
         }
