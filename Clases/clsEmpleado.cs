@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Data.Entity.Core;
+using System.Windows.Input;
 
 namespace abcCompleto
 {
@@ -19,11 +20,22 @@ namespace abcCompleto
         {
         }
 
+        //METODOS GENERALES
+
+        /// <summary>
+        /// Verifica que la conexion siga en pie.
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool VerificarConexionPrin()
         {
             return VerificarConexionRN();
         }
-        
+
+        /// <summary>
+        /// Realiza un recorrido por todos los grids y valida que no se encuentren vacios.
+        /// <param name="uiControles">Grid con los controles de la ventana.</param>
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool ValidarControlesVacios(UIElementCollection uiControles)
         {
             bool bRegresa = true;
@@ -77,7 +89,61 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Valida que el caracter que recibe sea correcto.
+        /// <param name="key">Tecla presionada por el usuario.</param>
+        /// <param name="sValidacion">Tipo de validacion ( EsNumero || EsLetra).</param>
+        /// </summary>
+        /// <returns>Bool</returns>
+        internal bool isCaracterValido(Key key, string sValidacion)
+        {
+            var cDato = (Char)KeyInterop.VirtualKeyFromKey(key);
+
+            if (key == Key.Escape)
+            {
+                return true;
+            }
+            else if (key == Key.Tab)
+            {
+                return true;
+            }
+            else if (key == Key.OemPeriod)
+            {
+                return false;
+            }
+            else if (key == Key.Space)
+            {
+                return false;
+            }
+            else if (sValidacion.ToLower() == "numero")
+            {
+                if (key.ToString().StartsWith("NumPad"))
+                {
+                    return true;
+                }
+                else if (char.IsNumber(cDato))
+                {
+                    return true;
+                }
+            }
+            else if (sValidacion.ToLower() == "letra")
+            {
+                if (char.IsLetter(cDato) || char.IsSeparator(cDato))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         //EMPLEADOS
+
+        /// <summary>
+        /// Retorna un empleado.
+        /// <param name="iNumEmpleado">Numero del empleado a buscar.</param>
+        /// </summary>
+        /// <returns>Bool</returns>
         internal abcCompleto.EmpleadoABC BuscarEmpleado(int iNumEmpleado) 
         {
             EmpleadoABC empleado = new EmpleadoABC();
@@ -92,6 +158,11 @@ namespace abcCompleto
             return empleado;
         }
 
+        /// <summary>
+        /// Elimina un empleado.
+        /// <param name="iNumEmpleado">Numero del empleado a eliminar.</param>
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool EliminarEmpleado(int iNumEmpleado)
         {
             bool bRegresa = false;
@@ -107,6 +178,11 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Guarda un empleado nuevo.
+        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool GuardarEmpleado(EmpleadoABC empleado)
         {
             bool bRegresa = false;
@@ -122,6 +198,11 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Modifica un empleado existente.
+        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool ActualizarEmpleado(EmpleadoABC empleado)
         {
             bool bRegresa = false;
@@ -137,6 +218,10 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Regresa todos los roles de la BD.
+        /// </summary>
+        /// <returns>List<string></returns>
         internal List<string> RetornarRoles()
         {
             List<string> roles = new List<string>();
@@ -151,6 +236,10 @@ namespace abcCompleto
             return roles;
         }
 
+        /// <summary>
+        /// Regresa todos los tipos de la BD.
+        /// </summary>
+        /// <returns>List<string></returns>
         internal List<string> RetornarTipos()
         {
             List<string> tipos = new List<string>();
@@ -165,6 +254,11 @@ namespace abcCompleto
             return tipos;
         }
 
+        /// <summary>
+        /// Regresa el id del Rol.
+        /// <param name="sNombreRol">Nombre del rol para filtrar la busqueda del ID.</param>
+        /// </summary>
+        /// <returns>int</returns>
         internal int RetornarIdRol(string sNombreRol)
         {
             int iRol = 0;
@@ -179,6 +273,11 @@ namespace abcCompleto
             return iRol;
         }
 
+        /// <summary>
+        /// Regresa el id del Tipo.
+        /// </summary>
+        /// <param name="sNombreTipo">Nombre del Tipo de empleado (externo || interno).</param>
+        /// <returns>int</returns>
         internal int RetornarIdTipo(string sNombreTipo)
         {
             int iTipo = 0;
@@ -193,6 +292,11 @@ namespace abcCompleto
             return iTipo;
         }
 
+        /// <summary>
+        /// Regresa los empleados que contengan lo que se va escribiendo en el control.
+        /// </summary>
+        /// <param name="sEmpleado">Filtro para la busqueda del empleado.</param>
+        /// <returns>List</returns>
         internal List<clsBusqueda> BuscarEmpleado(string sEmpleado)
         {
             List<abcCompleto.clsBusqueda> empleados = new List<clsBusqueda>();
@@ -209,6 +313,11 @@ namespace abcCompleto
 
         //MOVIIMIENTOS 
 
+        /// <summary>
+        /// Elimina un movimiento.
+        /// </summary>
+        /// <param name="iNumMovimiento">Numero del movimiento a eliminar.</param>
+        /// <returns>bool</returns>
         internal bool EliminarMovimiento(int iNumMovimiento)
         {
             bool bRegresa = false;
@@ -224,6 +333,11 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Guarda un movimiento nuevo.
+        /// </summary>
+        /// <param name="movimiento">Estructura que contiene los datos del mnovimiento a guardar.</param>
+        /// <returns>bool</returns>
         internal bool GuardarMovimiento(MovimientosABC movimiento)
         {
             bool bRegresa = false;
@@ -240,6 +354,11 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Actualiza un movimiento existente.
+        /// </summary>
+        /// <param name="movimiento">Estructura que contiene los datos del mnovimiento a actualizar.</param>
+        /// <returns>bool</returns>
         internal bool ActualizarMovimiento(MovimientosABC movimiento)
         {
             bool bRegresa = false;
@@ -255,6 +374,13 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Regresa los movimientos realizados en un rango de tiempo por el empleado.
+        /// </summary>
+        /// <param name="iNumEmpleado">Numero del empleado.</param>
+        /// <param name="dtFechaInicio">Fecha inicial para el rango de busqueda.</param>
+        /// <param name="dtFechaFin">Fecha final para el rango de busqueda.</param>
+        /// <returns>List</returns>
         internal List<clsBusquedaMovimiento> BuscarMovimientoLike(int iNumEmpleado, DateTime dtFechaInicio, DateTime dtFechaFin)
         {
             List<clsBusquedaMovimiento> movimiento = new List<clsBusquedaMovimiento>();
@@ -271,6 +397,11 @@ namespace abcCompleto
             return movimiento;
         }
 
+        /// <summary>
+        /// Regresa un movimiento.
+        /// </summary>
+        /// <param name="iNumMovimiento">Id del movimiento.</param>
+        /// <returns>List</returns>
         internal List<clsMovimiento> BuscarMovimiento(int iNumMovimiento)
         {
             List<clsMovimiento> movimiento = new List<clsMovimiento>();
@@ -287,6 +418,11 @@ namespace abcCompleto
             return movimiento;
         }
 
+        /// <summary>
+        /// Regresa la cantidad de vales que registro el empleado.
+        /// </summary>
+        /// <param name="iNumEmpleado">Numero de empleado para la busqueda de los vales.</param>
+        /// <returns>int</returns>
         internal int retornarVales(int iNumEmpleado)
         {
             int valestotales = 0;
@@ -306,6 +442,12 @@ namespace abcCompleto
         }
 
         //SALARIOS
+
+        /// <summary>
+        /// Regresa el salario de un empleado.
+        /// </summary>
+        /// <param name="iNumEmp">Numero de empleado.</param>
+        /// <returns>List</returns>
         internal List<SalarioABC> BuscarSalario(int iNumEmp)
         {
             List<abcCompleto.SalarioABC> salario = new List<SalarioABC>();
@@ -320,6 +462,10 @@ namespace abcCompleto
             return salario;
         }
 
+        /// <summary>
+        /// Regresa todos los salarios de la BD.
+        /// </summary>
+        /// <returns>List</returns>
         internal List<SalarioABC> BuscarSalarios()
         {
             List<abcCompleto.SalarioABC> salarios = new List<SalarioABC>();
@@ -336,6 +482,11 @@ namespace abcCompleto
             return salarios;
         }
 
+        /// <summary>
+        /// Elimina el salario del empleado.
+        /// </summary>
+        /// <param name="iNumEmpleado">Numero del empleado.</param>
+        /// <returns>bool</returns>
         internal bool EliminarSalario(int iNumEmpleado)
         {
             bool bRegresa = false;
@@ -351,12 +502,17 @@ namespace abcCompleto
             return bRegresa;
         }
 
-        internal bool GuardarSalario(SalarioABC movimiento)
+        /// <summary>
+        /// Guarda un salario nuevo.
+        /// </summary>
+        /// <param name="salario">Estructura del salario a guardar.</param>
+        /// <returns>bool</returns>
+        internal bool GuardarSalario(SalarioABC salario)
         {
             bool bRegresa = false;
             try
             {
-                GuardarSalarioRN(movimiento);
+                GuardarSalarioRN(salario);
                 bRegresa = true;
             }
             catch (Exception ex)
@@ -366,12 +522,17 @@ namespace abcCompleto
             return bRegresa;
         }
 
-        internal bool ActualizarSalario(SalarioABC movimiento)
+        /// <summary>
+        /// Guarda un salario existente.
+        /// </summary>
+        /// <param name="salario">Estructura del salario a modificar.</param>
+        /// <returns>bool</returns>
+        internal bool ActualizarSalario(SalarioABC salario)
         {
             bool bRegresa = false;
             try
             {
-               ActualizarSalarioRN(movimiento);
+               ActualizarSalarioRN(salario);
                 bRegresa = true;
             }
             catch (Exception ex)
@@ -382,6 +543,12 @@ namespace abcCompleto
         }
 
         //HORARIOS
+
+        /// <summary>
+        /// Regresa los registros de horario de un empleado.
+        /// </summary>
+        /// <param name="iNumEmpleado">Numero del empleado.</param>
+        /// <returns>bool</returns>
         internal List<HorariosABC> BuscarHorarios(int iNumEmpleado)
         {
             List<HorariosABC> horarios = new List<HorariosABC>();
@@ -398,6 +565,11 @@ namespace abcCompleto
             return horarios;
         }
 
+        /// <summary>
+        /// Guarda un horario.
+        /// </summary>
+        /// <param name="horario">Estructura del horario a guardar.</param>
+        /// <returns>bool</returns>
         internal bool GuardarHorario(HorariosABC horario)
         {
             bool bRegresa = false;
@@ -413,6 +585,11 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Regresa el bono que le pertenece al rol.
+        /// </summary>
+        /// <param name="idRol">Id del rol a buscar.</param>
+        /// <returns>int</returns>
         internal int RetornarBonoRol(int idRol)
         {
             int iBono = 0;

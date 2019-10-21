@@ -113,7 +113,6 @@
     <Compile Include="SalarioABC.cs">
       <DependentUpon>odbBodega.tt</DependentUpon>
     </Compile>
-    <Compile Include="start.cs" />
     <Compile Include="TipoABC.cs">
       <DependentUpon>odbBodega.tt</DependentUpon>
     </Compile>

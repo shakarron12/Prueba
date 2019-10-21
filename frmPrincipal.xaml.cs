@@ -202,21 +202,6 @@ namespace abcCompleto
                     imgUser.Source = empleado.img_usuario != null ? objControlador.ArrayToBitMapImage(empleado.img_usuario) : objControlador.CargarImagenDefalut();
                     bExiste = true;
                     btnAgregarMov.IsEnabled = true;
-                    /*foreach (var datos in empleado)
-                    {
-
-                        txtNombre.Text = datos.nombre;
-                        txtPrimerAp.Text = datos.primerap;
-                        txtSegundoAp.Text = datos.segundoap;
-                        txtDireccion.Text = datos.direccion;
-                        txtCurp.Text = datos.curp;
-                        dtFecha.Text = datos.fechanac.ToString();
-                        cbRol.SelectedIndex = datos.idrol - 1;
-                        cbTipo.SelectedIndex = datos.idtipo - 1;
-                        imgUser.Source = datos.img_usuario != null ? objControlador.ArrayToBitMapImage(datos.img_usuario) : objControlador.CargarImagenDefalut();
-                        bExiste = true;
-                        btnAgregarMov.IsEnabled = true;
-                    }*/
                     
                     var salario = objControlador.BuscarSalario(Convert.ToInt32(txtNoEmpleado.Text));
 
@@ -307,6 +292,14 @@ namespace abcCompleto
             {
                 txtNoEmpleado_LostFocus(sender, e);
             }
+            else if (objControlador.isCaracterValido(e.Key, "numero")) 
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void btnAgregarMov_Click(object sender, RoutedEventArgs e)
@@ -355,8 +348,6 @@ namespace abcCompleto
 
         private void tiMovimientos_GotFocus(object sender, RoutedEventArgs e)
         {
-            //dtgCalcMovimientos.ItemsSource = null;
-            //txtBusquedaEmp.Text = txtNoEmpleado.Text;
             lblNombreCompleto.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;
             dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();
         }
@@ -368,7 +359,7 @@ namespace abcCompleto
                 if (txtBusquedaEmp.Text != string.Empty)
                 {
                     var empleado = objControlador.BuscarEmpleado(Convert.ToInt32(txtBusquedaEmp.Text));
-                    if (empleado.idNumEmpleado != 0)
+                    if (empleado != null)
                     {
                         lblNombreCompleto.Content = empleado.nombre + " " + empleado.primerap + " " + empleado.segundoap;
                         dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos(Convert.ToInt32(txtBusquedaEmp.Text));
@@ -402,37 +393,48 @@ namespace abcCompleto
                                                        0, Key.Enter));
                 }
             }
+            else if (objControlador.isCaracterValido(e.Key, "numero"))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
         }
 
         //HORARIOS
         bool bHorario = false;
         private void tiHorarios_GotFocus(object sender, RoutedEventArgs e)
         {
-            //txtBusquedaEmp_Horarios.Text = txtNoEmpleado.Text;
             lblNombreCompleto_Horario.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;
             if (!bHorario)
             {
                 cbRol_Horario.SelectedIndex = empleadoCargado.idrol - 1;
                 cbTipo_Horario.SelectedIndex = empleadoCargado.idtipo - 1;
-                //cbRol_Horario.SelectedIndex = cbRol.SelectedIndex;
-                //cbTipo_Horario.SelectedIndex = cbTipo.SelectedIndex;
                 bHorario = true;
             }
-            //cbRol_Horario.SelectedIndex = cbTipo.SelectedIndex;
-            //cbTipo_Horario.SelectedIndex = cbTipo.SelectedIndex;
             chkCubrioTurno.IsEnabled = cbRol.SelectedItem.ToString() == "Auxiliar" ? true : false; 
 
         }
 
         private void btnChecar_Click(object sender, RoutedEventArgs e)
         {
-            //inserta horario para calcular salario
+            HorariosABC horario = new HorariosABC()
+            {
+                idnumempleado = Convert.ToInt32( txtBusquedaEmp_Horarios.Text),
+                idrol = objControlador.RetornarIdRol(cbRol.SelectedValue.ToString()),
+                idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString()),
+                fecha_movimiento = Convert.ToDateTime( DateTime.Today.ToShortDateString())
+            };
+            if (objControlador.GuardarHorario(horario))
+                MessageBox.Show("Exito...");
         }
 
         private void chkCubrioTurno_Checked(object sender, RoutedEventArgs e)
         {
             cbRol_Horario.IsEnabled = true;
-            //cbRol_Horario.ItemsSource = cbRol.Items;
         }
 
         private void chkCubrioTurno_Unchecked(object sender, RoutedEventArgs e)
@@ -443,6 +445,34 @@ namespace abcCompleto
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
             bHorario = false;
+        }
+
+        private void txtNoEmpleado_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSalario_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSalario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (objControlador.isCaracterValido(e.Key, "numero")) 
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     
     }

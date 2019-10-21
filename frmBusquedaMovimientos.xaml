@@ -18,7 +18,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding _IdMovimiento}" Header="NumEmpleado" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>
                 <DataGridTextColumn Binding="{Binding _INumEmpleado}" ClipboardContentBinding="{x:Null}" Header="NumEmpleado" SortMemberPath="NumEmpleado" Width="*"/>
-                <DataGridTextColumn Binding="{Binding sNombreCompleto}" ClipboardContentBinding="{x:Null}" Header="Nombre Completo" SortMemberPath="NomCompleto" Width="*"/>
                 <DataGridTextColumn Binding="{Binding _DtFecha}" ClipboardContentBinding="{x:Null}" Header="Fecha" SortMemberPath="Fecha" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

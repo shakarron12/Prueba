@@ -50,11 +50,6 @@ namespace abcCompleto
             cbTipo.SelectedIndex = iTipo - 1;
 
             dtFecha.Text = DateTime.Today.ToShortDateString();
-
-            if (cbRol.SelectedItem.ToString() == "Auxiliar")
-            {
-                chkCubrioTurno.Visibility = System.Windows.Visibility.Visible;
-            }
         }
 
         private void btnSubir_Click(object sender, RoutedEventArgs e)
@@ -74,18 +69,6 @@ namespace abcCompleto
             {
                 this.Close();
             }
-        }
-
-        private void chkCubrioTurno_Checked(object sender, RoutedEventArgs e)
-        {
-            cbRol.IsEnabled = true;
-            //aqui vamos a hacer la magia
-        }
-
-        private void chkCubrioTurno_Unchecked(object sender, RoutedEventArgs e)
-        {
-            cbRol.IsEnabled = false;
-            cbRol.SelectedIndex = _IRol - 1;
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)

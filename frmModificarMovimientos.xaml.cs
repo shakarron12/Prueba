@@ -72,7 +72,6 @@ namespace abcCompleto
                 idrol = objControlador.RetornarIdRol(cbRol.SelectedValue.ToString()),
                 idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString()),
                 fecha_movimiento = Convert.ToDateTime(dtFecha.Text)
-                
             };
 
             if (objControlador.ActualizarMovimiento(movimiento))
@@ -92,7 +91,6 @@ namespace abcCompleto
                     btnLimpiar_Click(sender, e);
                 }
             }
-           
         }
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)

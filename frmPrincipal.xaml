@@ -32,7 +32,7 @@
                                     <Image x:Name="imgUser" Stretch="Fill" Source="imagenes/user.ico" Margin="0,10,0,53"/>
                                 </Grid>
                             </Border>
-                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown" PreviewLostKeyboardFocus="txtNoEmpleado_PreviewLostKeyboardFocus" TextOptions.TextHintingMode="Fixed"/>
+                            <TextBox x:Name="txtNoEmpleado" HorizontalAlignment="Left" Height="23" Margin="130,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" LostFocus="txtNoEmpleado_LostFocus" TabIndex="1" KeyDown="txtNoEmpleado_KeyDown" PreviewLostKeyboardFocus="txtNoEmpleado_PreviewLostKeyboardFocus" TextOptions.TextHintingMode="Fixed" PreviewKeyDown="txtNoEmpleado_PreviewKeyDown"/>
                             <Label x:Name="lblNoEmpleado" Content="No. Empleado" HorizontalAlignment="Left" Margin="26,15,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="130,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="20" MaxLines="1" TabIndex="2"/>
                             <Label x:Name="lblNoEmpleado_Copy" Content="Nombre:" HorizontalAlignment="Left" Margin="26,61,0,0" VerticalAlignment="Top"/>
@@ -47,7 +47,7 @@
                             <DatePicker x:Name="dtFecha" HorizontalAlignment="Left" Height="25" Margin="130,258,0,0" VerticalAlignment="Top" Width="156" TabIndex="7"/>
                             <Label x:Name="lblNoEmpleado_Copy5" Content ="Fecha Nac:" HorizontalAlignment="Left" Margin="26,258,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblSalario" Content ="Salario:" HorizontalAlignment="Left" Margin="26,298,0,0" VerticalAlignment="Top"/>
-                            <TextBox x:Name="txtSalario" HorizontalAlignment="Left" Height="23" Margin="130,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" TabIndex="6" Text="default 7200.00" IsEnabled="False"/>
+                            <TextBox x:Name="txtSalario" HorizontalAlignment="Left" Height="23" Margin="130,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" MaxLength="12" MaxLines="1" TabIndex="6" Text="default 7200.00" IsEnabled="False" PreviewKeyDown="txtSalario_PreviewKeyDown" KeyDown="txtSalario_KeyDown"/>
                             <CheckBox x:Name="chkSalario" Content="Modificar Salario
                                       " Margin="300,300,336,23" Unchecked="chkSalario_Unchecked" Checked="chkSalario_Checked"></CheckBox>
                         </Grid>

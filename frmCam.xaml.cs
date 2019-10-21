@@ -64,7 +64,7 @@ namespace abcCompleto
 
         private void btnCapturar_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void frmCamara_Closing(object sender, System.ComponentModel.CancelEventArgs e)

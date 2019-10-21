@@ -27,8 +27,6 @@ create table EmpleadoABC
     REFERENCES RolABC (idrol),
     CONSTRAINT FK_EmpleadosABC_TipoABC FOREIGN KEY (idtipo)     
     REFERENCES TipoABC (idtipo),
-   
-   
 );
 
 create table SalarioABC
