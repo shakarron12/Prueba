@@ -7,7 +7,7 @@
         <Label Content="Numero de Empleado: " HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
         <Label Content="Nombre: " HorizontalAlignment="Left" Margin="9,48,0,0" VerticalAlignment="Top"/>
         <Label Content="Fecha:" HorizontalAlignment="Left" Margin="9,85,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="161,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="4" Text="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="161,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="4" Text="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="txtCantidad_KeyDown" PreviewKeyDown="txtCantidad_PreviewKeyDown">
             <TextBox.DataContext>
                 <local:MovimientosABC/>
             </TextBox.DataContext>

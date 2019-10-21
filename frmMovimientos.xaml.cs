@@ -115,5 +115,25 @@ namespace abcCompleto
             objModificar.ShowDialog();
         }
 
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (objControlador.isCaracterValido(e.Key, "numero"))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCantidad_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

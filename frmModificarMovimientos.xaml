@@ -4,9 +4,9 @@
         Title="frmModificarMovimientos" Height="311" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Width="335.667" KeyDown="Window_KeyDown" >
     <Grid>
         <Label Content="_idMovimiento" HorizontalAlignment="Left" Margin="53,17,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtMovimiento" HorizontalAlignment="Left" Height="23" Margin="155,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" KeyDown="txtMovimiento_KeyDown" LostFocus="txtMovimiento_LostFocus" PreviewLostKeyboardFocus="txtMovimiento_PreviewLostKeyboardFocus"/>
+        <TextBox x:Name="txtMovimiento" HorizontalAlignment="Left" Height="23" Margin="155,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" KeyDown="txtMovimiento_KeyDown" LostFocus="txtMovimiento_LostFocus" PreviewLostKeyboardFocus="txtMovimiento_PreviewLostKeyboardFocus" PreviewKeyDown="txtMovimiento_PreviewKeyDown"/>
         <Label Content="Cantidad" HorizontalAlignment="Left" Margin="54,58,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="155,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="155,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" PreviewKeyDown="txtCantidad_PreviewKeyDown" KeyDown="txtCantidad_KeyDown"/>
         <Label Content="Rol" HorizontalAlignment="Left" Margin="54,97,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbRol" HorizontalAlignment="Left" Margin="155,101,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="53,135,0,0" VerticalAlignment="Top"/>

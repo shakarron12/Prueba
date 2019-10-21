@@ -542,6 +542,25 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Regresa el bono que le pertenece al rol.
+        /// </summary>
+        /// <param name="idRol">Id del rol a buscar.</param>
+        /// <returns>int</returns>
+        internal int RetornarBonoRol(int idRol)
+        {
+            int iBono = 0;
+            try
+            {
+                iBono = RetornarBonoRolRN(idRol);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return iBono;
+        }
         //HORARIOS
 
         /// <summary>
@@ -583,27 +602,6 @@ namespace abcCompleto
                 MessageBox.Show(ex.Message);
             }
             return bRegresa;
-        }
-
-        /// <summary>
-        /// Regresa el bono que le pertenece al rol.
-        /// </summary>
-        /// <param name="idRol">Id del rol a buscar.</param>
-        /// <returns>int</returns>
-        internal int RetornarBonoRol(int idRol)
-        {
-            int iBono = 0;
-            try
-            {
-                iBono = RetornarBonoRolRN(idRol);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return iBono;
-        }
-        
+        }  
     }
 }

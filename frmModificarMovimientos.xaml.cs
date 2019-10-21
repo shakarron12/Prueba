@@ -60,6 +60,14 @@ namespace abcCompleto
                 txtMovimiento.Text = objBusquedaMov._SMovimiento;
                 txtMovimiento_LostFocus(sender, e);
             }
+            else if (objControlador.isCaracterValido(e.Key, "numero"))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -153,6 +161,34 @@ namespace abcCompleto
                 MessageBox.Show("Ingrese un id valido.", "Error", MessageBoxButton.OK);
                 e.Handled = true;
                 bExiste = true;
+            }
+        }
+
+        private void txtMovimiento_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCantidad_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (objControlador.isCaracterValido(e.Key, "numero"))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
 

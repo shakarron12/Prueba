@@ -75,6 +75,7 @@ select * from MovimientosABC
 select * from SalarioABC
 select * from HorariosABC
 
+/*
 update SalarioABC set salario_mensual = 1500 where idNumEmpleado = 97899459
 
 insert into HorariosABC(idnumempleado, idrol, idtipo, fecha_movimiento) values (97899459, 2,1,GETDATE())
@@ -85,3 +86,4 @@ drop table RolABC;
 drop table EmpleadoABC;
 drop table SalarioABC;
 drop table MovimientosABC;
+*/

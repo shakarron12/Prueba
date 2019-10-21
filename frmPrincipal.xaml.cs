@@ -39,10 +39,13 @@ namespace abcCompleto
         bool bExiste;
         clsPrincipal objControlador;
         clsCalculoMovimiento objControladorMovimientos;
+        EmpleadoABC empleadoCargado;
+
         public MainWindow()
         {
             
             InitializeComponent();
+            MessageBox.Show("entro");
             if (CargarArchivoConfig())
             {
                 objControlador = new clsPrincipal();
@@ -107,6 +110,32 @@ namespace abcCompleto
             { return false; }
 
             return true;
+        }
+
+        private void Limpiar(bool bLimpiarCompleto)
+        {
+            bExiste = false;
+            txtNombre.Clear();
+            txtPrimerAp.Clear();
+            txtSegundoAp.Clear();
+            txtDireccion.Clear();
+            txtCurp.Clear();
+            dtFecha.Text = string.Empty;
+            cbRol.SelectedIndex = -1;
+            cbTipo.SelectedIndex = -1;
+            btnAgregarMov.IsEnabled = false;
+            imgUser.Source = objControlador.CargarImagenDefalut();
+            txtSalario.Text = "default 7200.00";
+            chkSalario.IsChecked = false;
+            tiHorarios.IsEnabled = false;
+            empleadoCargado = null;
+            if (bLimpiarCompleto)
+            {
+                txtNoEmpleado.Clear();
+                txtNoEmpleado.IsEnabled = true;
+                txtNoEmpleado.Focus();
+
+            }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -179,7 +208,7 @@ namespace abcCompleto
             }
 
         }
-        EmpleadoABC empleadoCargado;
+       
         private void txtNoEmpleado_LostFocus(object sender, RoutedEventArgs e)
         {
             if (txtNoEmpleado.Text != string.Empty)
@@ -232,32 +261,6 @@ namespace abcCompleto
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             Limpiar(true);
-        }
-
-        private void Limpiar(bool bLimpiarCompleto)
-        {
-            bExiste = false;
-            txtNombre.Clear();
-            txtPrimerAp.Clear();
-            txtSegundoAp.Clear();
-            txtDireccion.Clear();
-            txtCurp.Clear();
-            dtFecha.Text = string.Empty;
-            cbRol.SelectedIndex = -1;
-            cbTipo.SelectedIndex = -1;
-            btnAgregarMov.IsEnabled = false;
-            imgUser.Source = objControlador.CargarImagenDefalut();
-            txtSalario.Text = "default 7200.00";
-            chkSalario.IsChecked = false;
-            tiHorarios.IsEnabled = false;
-            empleadoCargado = null;
-            if (bLimpiarCompleto)
-            {
-                txtNoEmpleado.Clear();
-                txtNoEmpleado.IsEnabled = true;
-                txtNoEmpleado.Focus();
-
-            }
         }
 
         private void frmMenu_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -424,8 +427,8 @@ namespace abcCompleto
             HorariosABC horario = new HorariosABC()
             {
                 idnumempleado = Convert.ToInt32( txtBusquedaEmp_Horarios.Text),
-                idrol = objControlador.RetornarIdRol(cbRol.SelectedValue.ToString()),
-                idtipo = objControlador.RetornarIdTipo(cbTipo.SelectedValue.ToString()),
+                idrol = objControlador.RetornarIdRol(cbRol_Horario.SelectedValue.ToString()),
+                idtipo = objControlador.RetornarIdTipo(cbTipo_Horario.SelectedValue.ToString()),
                 fecha_movimiento = Convert.ToDateTime( DateTime.Today.ToShortDateString())
             };
             if (objControlador.GuardarHorario(horario))
