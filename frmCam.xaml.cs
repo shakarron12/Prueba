@@ -44,7 +44,7 @@ namespace abcCompleto
 
             openFile.Title = "Seleccione la Imagen a Mostrar";
 
-            openFile.Filter = "Todos(*.*)|*.*|Imagenes|*.jpg;*.gif;*.png;*.bmp";
+            openFile.Filter = "Imagenes|*.jpg;*.gif;*.png;*.bmp";
 
             if (openFile.ShowDialog() == true)
             {

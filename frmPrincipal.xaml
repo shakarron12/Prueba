@@ -91,7 +91,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="txtBusquedaEmp_KeyDown" Text="{Binding Text, ElementName=txtNoEmpleado}"/>
+                    <TextBox x:Name="txtBusquedaEmp" Height="23" Margin="130,26,470,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="txtBusquedaEmp_KeyDown" Text="{Binding Text, ElementName=txtNoEmpleado}" PreviewKeyDown="txtBusquedaEmp_PreviewKeyDown"/>
                     <DataGrid x:Name="dtgCalcMovimientos"   AutoGenerateColumns="False" IsTextSearchEnabled="False" HeadersVisibility="Column" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" GridLinesVisibility="None" IsReadOnly="True" IsManipulationEnabled="True" Margin="8,77,12,0" VerticalAlignment="Top" Height="423">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding _NumEmpleado}" Header="# Empleado" Foreground="Black" Width="*" SortMemberPath="NumEmp" MaxWidth="100"/>

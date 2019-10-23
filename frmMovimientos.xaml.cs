@@ -35,7 +35,6 @@ namespace abcCompleto
             set { iRol = value; }
         }
         
-
         public frmMovimientos(string sNumEmpleado, string sNombreCompleto, int iNumEmpleado,int iRol, int iTipo)
         {
             InitializeComponent();
@@ -134,6 +133,5 @@ namespace abcCompleto
                 e.Handled = true;
             }
         }
-
     }
 }

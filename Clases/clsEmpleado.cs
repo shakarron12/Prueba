@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace abcCompleto
 {
-    public abstract class clsEmpleado : clsRN 
+    public class clsEmpleado : clsRN 
     {
         public clsEmpleado() 
         {
@@ -107,7 +107,7 @@ namespace abcCompleto
             {
                 return true;
             }
-            else if (key == Key.OemPeriod)
+            else if (key.ToString().StartsWith("Oem"))
             {
                 return false;
             }
@@ -160,8 +160,8 @@ namespace abcCompleto
 
         /// <summary>
         /// Elimina un empleado.
-        /// <param name="iNumEmpleado">Numero del empleado a eliminar.</param>
         /// </summary>
+        /// <param name="iNumEmpleado">Numero del empleado a eliminar.</param>
         /// <returns>Bool</returns>
         internal bool EliminarEmpleado(int iNumEmpleado)
         {
@@ -180,8 +180,8 @@ namespace abcCompleto
 
         /// <summary>
         /// Guarda un empleado nuevo.
-        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
         /// </summary>
+        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
         /// <returns>Bool</returns>
         internal bool GuardarEmpleado(EmpleadoABC empleado)
         {
@@ -200,8 +200,8 @@ namespace abcCompleto
 
         /// <summary>
         /// Modifica un empleado existente.
-        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
         /// </summary>
+        /// <param name="empleado">Estructura que contiene los datos de un empleado.</param>
         /// <returns>Bool</returns>
         internal bool ActualizarEmpleado(EmpleadoABC empleado)
         {
@@ -221,7 +221,7 @@ namespace abcCompleto
         /// <summary>
         /// Regresa todos los roles de la BD.
         /// </summary>
-        /// <returns>List<string></returns>
+        /// <returns>List</returns>
         internal List<string> RetornarRoles()
         {
             List<string> roles = new List<string>();
@@ -239,7 +239,7 @@ namespace abcCompleto
         /// <summary>
         /// Regresa todos los tipos de la BD.
         /// </summary>
-        /// <returns>List<string></returns>
+        /// <returns>List</returns>
         internal List<string> RetornarTipos()
         {
             List<string> tipos = new List<string>();
@@ -312,6 +312,25 @@ namespace abcCompleto
         }
 
         //MOVIIMIENTOS 
+
+        /// <summary>
+        /// Elimina un movimiento.
+        /// </summary>
+        /// <param name="iNumEmpleado">Numero del empleado.</param>
+        /// <returns>int</returns>
+        internal int RetornaTipoEmpleado(int iNumEmpleado)
+        {
+            int iTipo = 0;
+            try
+            {
+                iTipo = RetornarTipoEmpleadoRN(iNumEmpleado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return iTipo;
+        }
 
         /// <summary>
         /// Elimina un movimiento.
@@ -446,14 +465,14 @@ namespace abcCompleto
         /// <summary>
         /// Regresa el salario de un empleado.
         /// </summary>
-        /// <param name="iNumEmp">Numero de empleado.</param>
+        /// <param name="iNumEmpleado">Numero de empleado.</param>
         /// <returns>List</returns>
-        internal List<SalarioABC> BuscarSalario(int iNumEmp)
+        internal List<SalarioABC> BuscarSalario(int iNumEmpleado)
         {
             List<abcCompleto.SalarioABC> salario = new List<SalarioABC>();
             try
             {
-                salario = BuscarSalarioRN(iNumEmp);
+                salario = BuscarSalarioRN(iNumEmpleado);
             }
             catch (Exception ex)
             {
@@ -567,7 +586,7 @@ namespace abcCompleto
         /// Regresa los registros de horario de un empleado.
         /// </summary>
         /// <param name="iNumEmpleado">Numero del empleado.</param>
-        /// <returns>bool</returns>
+        /// <returns>List</returns>
         internal List<HorariosABC> BuscarHorarios(int iNumEmpleado)
         {
             List<HorariosABC> horarios = new List<HorariosABC>();

@@ -17,12 +17,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ConvertImage;
-using System.Runtime.InteropServices;
 using System.Net;
 
 namespace abcCompleto
 {
+    /// <summary>
+    /// Estructura con los datos para la cadena de conexion.
+    /// </summary>
     public struct Conexion
     {
         public static string sIp = string.Empty;
@@ -30,6 +31,7 @@ namespace abcCompleto
         public static string sDB = string.Empty;
         public static string sContraseña = string.Empty;
     }
+
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
@@ -45,7 +47,7 @@ namespace abcCompleto
         {
             
             InitializeComponent();
-            MessageBox.Show("entro");
+
             if (CargarArchivoConfig())
             {
                 objControlador = new clsPrincipal();
@@ -73,12 +75,16 @@ namespace abcCompleto
            
         }
 
+        /// <summary>
+        /// Busca el archivo de configuracion para la BD.
+        /// </summary>
+        /// <returns>bool</returns>
         internal bool CargarArchivoConfig()
         {
             bool bRegresa = false;
             try
             {
-                using (StreamReader reader = new StreamReader(@"abcDat.txt"))
+                using (StreamReader reader = new StreamReader(@"abcDat.dat"))
                 {
                     string[] line = reader.ReadToEnd().Split('\n');
 
@@ -102,6 +108,10 @@ namespace abcCompleto
             return bRegresa;
         }
 
+        /// <summary>
+        /// Valida si la ip es correcta.
+        /// </summary>
+        /// <returns>void</returns>
         private static bool ValidaIP(string sIP)
         {
             try
@@ -112,6 +122,11 @@ namespace abcCompleto
             return true;
         }
 
+        /// <summary>
+        /// Limpia los controles de la pantalla principal.
+        /// </summary>
+        /// <param name="bLimpiarCompleto">Variable para saber si es un limpiado completo de la pantalla.</param>
+        /// <returns>void</returns>
         private void Limpiar(bool bLimpiarCompleto)
         {
             bExiste = false;
@@ -405,6 +420,14 @@ namespace abcCompleto
                 e.Handled = true;
             }
 
+        }
+
+        private void txtBusquedaEmp_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
         }
 
         //HORARIOS

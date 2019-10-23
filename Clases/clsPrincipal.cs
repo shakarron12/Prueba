@@ -19,11 +19,21 @@ namespace abcCompleto
         
         }
 
+
+        /// <summary>
+        /// Verifica que la conexion siga en pie.
+        /// </summary>
+        /// <returns>Bool</returns>
         internal bool VerificarConexion() 
         {
             return VerificarConexionPrin();
         }
 
+        /// <summary>
+        /// Convierte de bitmapimage a arreglo de bytes.
+        /// </summary>
+        /// <param name="image">Imagen que desea convertir.</param>
+        /// <returns>byte[]</returns>
         internal byte[] BitMapImageToArray(BitmapImage image)
         {
             byte[] data;
@@ -38,6 +48,11 @@ namespace abcCompleto
             return data;
         }
 
+        /// <summary>
+        /// Convierte de arreglo de bytes a bitmapimage.
+        /// </summary>
+        /// <param name="array">Arreglo de bytes que desea convertir.</param>
+        /// <returns>BitmapImage</returns>
         internal BitmapImage ArrayToBitMapImage(byte[] array)
         {
             BitmapImage image = new BitmapImage();
@@ -47,6 +62,11 @@ namespace abcCompleto
             return image;
         }
 
+        /// <summary>
+        /// Busca el icono de la imagen.
+        /// </summary>
+        /// <param name="array">Arreglo de bytes que desea convertir.</param>
+        /// <returns>BitmapImage</returns>
         internal BitmapImage CargarImagenDefalut()
         {
             string fullimagepath = Directory.GetCurrentDirectory() + "\\iconos\\user.ico";

@@ -60,6 +60,10 @@ namespace abcCompleto
                 txtMovimiento.Text = objBusquedaMov._SMovimiento;
                 txtMovimiento_LostFocus(sender, e);
             }
+            else if (e.Key == Key.Enter)
+            {
+                txtMovimiento_LostFocus(sender, e);
+            }
             else if (objControlador.isCaracterValido(e.Key, "numero"))
             {
                 e.Handled = false;
@@ -135,6 +139,7 @@ namespace abcCompleto
                     bExiste = false;
                     txtMovimiento.IsEnabled = true;
                     txtMovimiento.Focus();
+                    MessageBox.Show("Ingrese un id valido.");
                 }
             }
             else
