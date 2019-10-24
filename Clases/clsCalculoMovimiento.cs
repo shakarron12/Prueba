@@ -9,7 +9,7 @@ namespace abcCompleto
 {
      class clsCalculoMovimiento : clsEmpleado
      {
-         private int iNumEmpleado;
+        private int iNumEmpleado;
         private string sSueldoNto;
         private string sSueldoBrto;
         private int iVales;
@@ -119,7 +119,7 @@ namespace abcCompleto
         /// </summary>
         /// <param name="iNumEmpleado">Numero del empleado.</param>
         /// <returns>void</returns>
-        internal float CalcularTotalBono(int iNumEmpleado) 
+        private float CalcularTotalBono(int iNumEmpleado) 
         {
             List<HorariosABC> horariosEmpleado = BuscarHorarios(iNumEmpleado);
             ArrayList alListaRoles = new ArrayList();

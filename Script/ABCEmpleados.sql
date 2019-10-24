@@ -81,9 +81,10 @@ update SalarioABC set salario_mensual = 1500 where idNumEmpleado = 97899459
 insert into HorariosABC(idnumempleado, idrol, idtipo, fecha_movimiento) values (97899459, 2,1,GETDATE())
 insert into SalarioABC (idNumEmpleado) values (97848972);
 
-drop table TipoABC;
-drop table RolABC;
-drop table EmpleadoABC;
+drop table HorariosABC;
 drop table SalarioABC;
 drop table MovimientosABC;
+drop table EmpleadoABC;
+drop table TipoABC;
+drop table RolABC;
 */

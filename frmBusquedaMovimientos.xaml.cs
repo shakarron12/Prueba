@@ -57,7 +57,12 @@ namespace abcCompleto
         {
             if (objControlador.ValidarControlesVacios(gdControles.Children))
             {
+                //valida que traiga datos si no mensaje que no hay movimientos
                 dtgMovimientos.ItemsSource = objControlador.BuscarMovimientoLike(_INumEmpleado, Convert.ToDateTime(dtFechaInicio.Text), Convert.ToDateTime(dtFechaFin.Text));
+            }
+            else 
+            {
+                MessageBox.Show("Coloque una fecha inicial y final.");
             }
         }
 

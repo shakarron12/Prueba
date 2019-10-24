@@ -177,6 +177,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>odbBodega.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="diagrama_de_clases.cd" />
     <None Include="odbBodega.edmx.diagram">
       <DependentUpon>odbBodega.edmx</DependentUpon>
     </None>

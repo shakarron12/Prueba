@@ -86,7 +86,7 @@
                     <Button x:Name="btnAgregarMov" Content="Agregar Movimientos" Grid.Column="4" Height="30" Margin="160,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,0.504" Click="btnAgregarMov_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tiMovimientos" Header="Movimientos" GotFocus="tiMovimientos_GotFocus">
+            <TabItem x:Name="tiNomina" Header="Nomina" GotFocus="tiNomina_GotFocus">
                 <Grid Background="#FFE5E5E5" Name="gridMovimientos">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="abcCompleto.clsRN">
+    <Position X="5.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AVBIACIEAgAAgAAAIIAAAAAAII4CAAAAAELgAAKQIAA=</HashCode>
+      <FileName>Clases\clsRN.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsBusqueda">
+    <Position X="6" Y="14.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAACAAAAAAAACABAAAAA=</HashCode>
+      <FileName>Clases\clsBusqueda.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsBusquedaMovimiento">
+    <Position X="8.5" Y="14.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AGEAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAIA=</HashCode>
+      <FileName>Clases\clsBusquedaMovimiento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsCalculoMovimiento">
+    <Position X="0.5" Y="14.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAABACAAAAAAIACEQAACAAABAQAAAAAAAAACIIgAA=</HashCode>
+      <FileName>Clases\clsCalculoMovimiento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsEmpleado">
+    <Position X="5.25" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAggAAAiACAEATYBAAQAIAAgABAgAECkJIAAIgA=</HashCode>
+      <FileName>Clases\clsEmpleado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsMovimiento">
+    <Position X="11.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAAAAAAACCAACAQAAAAAAgAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Clases\clsMovimiento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="abcCompleto.clsPrincipal">
+    <Position X="3.5" Y="14.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAABABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\clsPrincipal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

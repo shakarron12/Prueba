@@ -19,7 +19,6 @@ namespace abcCompleto
         
         }
 
-
         /// <summary>
         /// Verifica que la conexion siga en pie.
         /// </summary>

@@ -139,7 +139,6 @@ namespace abcCompleto
                     bExiste = false;
                     txtMovimiento.IsEnabled = true;
                     txtMovimiento.Focus();
-                    MessageBox.Show("Ingrese un id valido.");
                 }
             }
             else

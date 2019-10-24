@@ -122,6 +122,7 @@ namespace abcCompleto
             return true;
         }
 
+        //EMPLEADO
         /// <summary>
         /// Limpia los controles de la pantalla principal.
         /// </summary>
@@ -351,7 +352,7 @@ namespace abcCompleto
 
         private void txtNoEmpleado_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if (txtNoEmpleado.Text == string.Empty && e.NewFocus != tiMovimientos && e.NewFocus != txtBusquedaEmp)
+            if (txtNoEmpleado.Text == string.Empty && e.NewFocus != tiNomina && e.NewFocus != txtBusquedaEmp)
             {
                 MessageBox.Show("Ingrese un numero de empleado", "Error", MessageBoxButton.OK);
                 e.Handled = true;
@@ -362,9 +363,9 @@ namespace abcCompleto
             }
         }
 
-        //MOVIMIENTOS
+        //NOMINA
 
-        private void tiMovimientos_GotFocus(object sender, RoutedEventArgs e)
+        private void tiNomina_GotFocus(object sender, RoutedEventArgs e)
         {
             lblNombreCompleto.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;
             dtgCalcMovimientos.ItemsSource = objControladorMovimientos.traerDatos();
@@ -430,7 +431,7 @@ namespace abcCompleto
             }
         }
 
-        //HORARIOS
+        //HORARIO
         bool bHorario = false;
         private void tiHorarios_GotFocus(object sender, RoutedEventArgs e)
         {
