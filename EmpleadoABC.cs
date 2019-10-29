@@ -11,7 +11,7 @@ namespace abcCompleto
 {
     using System;
     using System.Collections.Generic;
-    
+     
     public partial class EmpleadoABC
     {
         public EmpleadoABC()

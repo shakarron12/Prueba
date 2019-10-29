@@ -39,6 +39,7 @@ namespace abcCompleto
     {
 
         bool bExiste;
+        bool bHorario;
         clsPrincipal objControlador;
         clsCalculoMovimiento objControladorMovimientos;
         EmpleadoABC empleadoCargado;
@@ -47,7 +48,7 @@ namespace abcCompleto
         {
             
             InitializeComponent();
-
+            bHorario = false;
             if (CargarArchivoConfig())
             {
                 objControlador = new clsPrincipal();
@@ -160,9 +161,11 @@ namespace abcCompleto
             {
                 if (MessageBox.Show("¿Seguro que quiere eliminar el Empleado?", "Eliminar Empleado", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    if (objControlador.EliminarEmpleado(Convert.ToInt32(txtNoEmpleado.Text)))
-                        if (objControlador.EliminarSalario(Convert.ToInt32(txtNoEmpleado.Text)))
-                            MessageBox.Show("Se elimino con exito!...");
+                    if (objControlador.EliminarEmpleado(Convert.ToInt32(txtNoEmpleado.Text))) 
+                    {
+                        MessageBox.Show("Se elimino con exito!...");
+                        Limpiar(true);
+                    }
                 }
             }
         }
@@ -432,7 +435,6 @@ namespace abcCompleto
         }
 
         //HORARIO
-        bool bHorario = false;
         private void tiHorarios_GotFocus(object sender, RoutedEventArgs e)
         {
             lblNombreCompleto_Horario.Content = txtNombre.Text + " " + txtPrimerAp.Text + " " + txtSegundoAp.Text;

@@ -258,7 +258,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MovimientosABC_EmpleadoABC">
-          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" >
+          </End>
           <End Type="RopaModel.MovimientosABC" Role="MovimientosABC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpleadoABC">
@@ -279,7 +280,8 @@
           <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_SalarioABC_EmpleadoABC" FromRole="SalarioABC" ToRole="EmpleadoABC" />
         </EntityType>
         <Association Name="FK_SalarioABC_EmpleadoABC">
-          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="0..1" />
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="0..1" >
+          </End>
           <End Type="RopaModel.SalarioABC" Role="SalarioABC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpleadoABC">
@@ -302,7 +304,8 @@
           <NavigationProperty Name="EmpleadoABC" Relationship="RopaModel.FK_HorariosABC_EmpleadoABC" FromRole="HorariosABC" ToRole="EmpleadoABC" />
         </EntityType>
         <Association Name="FK_HorariosABC_EmpleadoABC">
-          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" />
+          <End Type="RopaModel.EmpleadoABC" Role="EmpleadoABC" Multiplicity="1" >
+          </End>
           <End Type="RopaModel.HorariosABC" Role="HorariosABC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpleadoABC">

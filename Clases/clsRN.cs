@@ -11,12 +11,12 @@ using System.Windows.Data;
 
 namespace abcCompleto
 {
-  
-    public class clsRN 
+
+    public class clsRN
     {
         odbBodegaPrueba odb;
 
-        public clsRN() 
+        public clsRN()
         {
             odb = new odbBodegaPrueba();
         }
@@ -24,7 +24,7 @@ namespace abcCompleto
         /// <summary>
         /// Da un refresh a las entidades cargadas.
         /// </summary>
-        protected void RefrescarEntidades() 
+        protected void RefrescarEntidades()
         {
             foreach (var entity in odb.ChangeTracker.Entries())
             {
@@ -46,7 +46,7 @@ namespace abcCompleto
             }
             return bConected;
         }
-        
+
         //EMPLEADOS
 
         /// <summary>
@@ -56,7 +56,11 @@ namespace abcCompleto
         /// <returns>void</returns>
         protected void EliminarEmpleadoRN(int iNumEmpleado)
         {
-            var resultado = (from a in odb.EmpleadoABC where a.idNumEmpleado == iNumEmpleado select a).Single();
+            EliminarSalarioRN(iNumEmpleado);
+            EliminarMovimientosEmpleadoRN(iNumEmpleado);
+            EliminarHorarioRN(iNumEmpleado);
+
+            var resultado = (from a in odb.EmpleadoABC where a.idNumEmpleado == iNumEmpleado select a).Single<EmpleadoABC>();
             odb.EmpleadoABC.Remove(resultado);
             odb.SaveChanges();
         }
@@ -81,7 +85,8 @@ namespace abcCompleto
         /// <returns>List</returns>
         protected List<clsBusqueda> BuscarEmpleadoLikeRN(string sNombreUser)
         {
-            return (from a in odb.EmpleadoABC where a.nombre.ToString().Contains(sNombreUser) || a.primerap.ToString().Contains(sNombreUser) || a.segundoap.ToString().Contains(sNombreUser) 
+            return (from a in odb.EmpleadoABC
+                    where a.nombre.ToString().Contains(sNombreUser) || a.primerap.ToString().Contains(sNombreUser) || a.segundoap.ToString().Contains(sNombreUser)
                     select new clsBusqueda { _IdNumEmpleado = a.idNumEmpleado, _SNombreCompleto = (a.nombre + " " + a.primerap + " " + a.segundoap) }).ToList();
         }
 
@@ -141,7 +146,7 @@ namespace abcCompleto
         /// <returns>int</returns>
         protected int RetornaridRolRN(string idRol)
         {
-            return (int)(from a in odb.RolABC where a.desc_rol == (idRol) select a.idrol).ToList()[0];;
+            return (int)(from a in odb.RolABC where a.desc_rol == (idRol) select a.idrol).ToList()[0]; ;
         }
 
         /// <summary>
@@ -159,9 +164,9 @@ namespace abcCompleto
         /// </summary>
         /// <param name="idRol">Id del rol a buscar.</param>
         /// <returns>int</returns>
-        protected int RetornarBonoRolRN(int idRol) 
+        protected int RetornarBonoRolRN(int idRol)
         {
-            return (int)(from a in odb.RolABC where a.idrol == (idRol) select a.bono).ToList()[0];;
+            return (int)(from a in odb.RolABC where a.idrol == (idRol) select a.bono).ToList()[0]; ;
         }
 
         //MOVIMIENTOS
@@ -195,9 +200,31 @@ namespace abcCompleto
         protected void EliminarMovimientoRN(int idMovimiento)
         {
             var resultado = (from a in odb.MovimientosABC where a.idmovimiento == idMovimiento select a).Single();
-
             odb.MovimientosABC.Remove(resultado);
             odb.SaveChanges();
+        }
+
+        /// <summary>
+        /// Elimina todos los movimientos de un empleado.
+        /// </summary>
+        /// <param name="idNumEmpleado">Numero de empleado.</param>
+        /// <returns>void</returns>
+        protected void EliminarMovimientosEmpleadoRN(int idNumEmpleado)
+        {
+            List<MovimientosABC> MovimientosRetornar = ((from a in odb.MovimientosABC where a.idnumempleado == idNumEmpleado select a).ToList().Count) > 0
+                ? (from a in odb.MovimientosABC where a.idnumempleado == idNumEmpleado select a).ToList()
+                : null;
+            //var resultado = (from a in odb.MovimientosABC where a.idnumempleado == idNumEmpleado select a).Single();
+            if (MovimientosRetornar != null)
+            {
+
+                foreach (MovimientosABC MovimientoEliminar in MovimientosRetornar)
+                {
+                    odb.MovimientosABC.Remove(MovimientoEliminar);
+                }
+                
+                odb.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -289,9 +316,15 @@ namespace abcCompleto
         /// <returns>void</returns>
         protected void EliminarSalarioRN(int iNumEmpleado)
         {
-            var resultado = (from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).Single();
-            odb.SalarioABC.Remove(resultado);
-            odb.SaveChanges();
+            SalarioABC SalarioRetornar = ((from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).ToList().Count) > 0
+                ? (from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).ToList()[0]
+                : null;
+            //var resultado = (from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).Single();
+            if (SalarioRetornar != null)
+            {
+                odb.SalarioABC.Remove(SalarioRetornar);
+                odb.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -315,7 +348,7 @@ namespace abcCompleto
         /// <returns>List</returns>
         protected List<abcCompleto.SalarioABC> BuscarSalarioRN(int iNumEmpleado)
         {
-            RefrescarEntidades();            
+            RefrescarEntidades();
             return (from a in odb.SalarioABC where a.idNumEmpleado == iNumEmpleado select a).ToList();
 
         }
@@ -337,7 +370,7 @@ namespace abcCompleto
         /// </summary>
         /// <param name="iNumEmpleado">Numero del empleado.</param>
         /// <returns>List</returns>
-        protected List<HorariosABC> BuscarHorariosRN(int iNumEmpleado) 
+        protected List<HorariosABC> BuscarHorariosRN(int iNumEmpleado)
         {
             return (from a in odb.HorariosABC
                     where a.idnumempleado == iNumEmpleado && a.idtipo != 2
@@ -353,6 +386,27 @@ namespace abcCompleto
         {
             odb.HorariosABC.Add(horario);
             odb.SaveChanges();
+        }
+
+        /// <summary>
+        /// Elimina los horarios de un empleado.
+        /// </summary>
+        /// <param name="iNumEmpleado">id del empleado.</param>
+        /// <returns>void</returns>
+        protected void EliminarHorarioRN(int iNumEmpleado)
+        {
+            List<HorariosABC> HorariosRetornar = ((from a in odb.HorariosABC where a.idnumempleado == iNumEmpleado select a).ToList().Count) > 0
+                ? (from a in odb.HorariosABC where a.idnumempleado == iNumEmpleado select a).ToList()
+                : null;
+            //var resultado = (from a in odb.HorariosABC where a.idnumempleado == iNumEmpleado select a).Single();
+            if (HorariosRetornar != null)
+            {
+                foreach (HorariosABC HorarioEliminar in HorariosRetornar)
+                {
+                    odb.HorariosABC.Remove(HorarioEliminar);
+                }
+                odb.SaveChanges();
+            }
         }
     }
 }

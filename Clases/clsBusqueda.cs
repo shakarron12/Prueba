@@ -23,7 +23,6 @@ namespace abcCompleto
             get { return idNumEmpleado; }
             set { idNumEmpleado = value; }
         }
-
         public clsBusqueda() 
         {
            
